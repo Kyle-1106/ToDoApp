@@ -8,3 +8,21 @@ services:
      volumes:
        - "./frontend:/app"
      tty: true
+  backend:
+      image: node:18-slim
+      container_name: express-container
+      environment:
+       - DEBUG=backend:*
+#ホットリロード（ソースの変更を即時反映）をON
+       - CHOKIDAR_USEPOLLING=truecd
+      tty: true
+      ports:
+       - '3000:3000'
+       #ホスト側のbackendをコンテナのappにマウント
+      volumes:
+       - ./backend:/app
+      #起動時のカレントフォルダ
+      working_dir: /app
+
+      command: 
+        sh -c 'npx tsc; npm run nodemon'
