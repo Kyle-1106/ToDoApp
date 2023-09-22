@@ -26,3 +26,17 @@ services:
 
       command: 
         sh -c 'npx tsc; npm run nodemon'
+  DB:
+     image: 'postgres:15' 
+     container_name: postgres-container
+     restart: always
+     environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD=: postgres_pw
+      POSTGRES_DATABASE: postgres
+     ports: 
+     - '5432:5432' 
+     volumes: 
+     - 'postgres:/var/lib/postgresql/data'
+volumes:
+ postgres:
