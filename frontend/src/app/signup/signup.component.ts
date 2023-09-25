@@ -12,10 +12,9 @@ export class SignupComponent {
   email:FormControl;
   password:FormControl;
   confirmPassword:FormControl;
-  
-  showPassword: boolean = false;
 
   constructor(private formBuilder:FormBuilder){
+    //各項目にバリデーション追加
     this.name=new FormControl("",[Validators.required]);
     this.email=new  FormControl("",[Validators.required,Validators.email]);
     this.password=new FormControl("",[Validators.required,Validators.minLength(6)]);
@@ -27,19 +26,18 @@ export class SignupComponent {
       email:this.email,
       password:this.password,
       confirmPassword:this.confirmPassword,
-    },{
+    },
+    {//カスタムバリデーション
       validators: this.passwordMatchValidator 
     })
   }
 
+  
+  //再入力パスワード比較処理
   private passwordMatchValidator(formGroup: FormGroup) {
     const password=formGroup.get("password")?.value;
     const confirmPassword=formGroup.get("confirmPassword")?.value;
-    console.log("password")
-    console.log(password)
-    console.log("confirmPassword")
-    console.log(confirmPassword)
-    
+
     if(password==confirmPassword){
       return null;
     }
