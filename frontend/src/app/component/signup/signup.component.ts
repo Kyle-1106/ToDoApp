@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
+import { SignupService } from '../../services/signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ export class SignupComponent {
   password:FormControl;
   confirmPassword:FormControl;
 
-  constructor(private formBuilder:FormBuilder){
+  constructor(private formBuilder:FormBuilder,private signupservice:SignupService){
     //各項目にバリデーション追加
     this.name=new FormControl("",[Validators.required]);
     this.email=new  FormControl("",[Validators.required,Validators.email]);
@@ -28,30 +29,20 @@ export class SignupComponent {
       confirmPassword:this.confirmPassword,
     },
     {//カスタムバリデーション
-      validators: this.passwordMatchValidator 
+      validators: this.signupservice.passwordMatchValidator
     })
   }
 
-  
-  //再入力パスワード比較処理
-  private passwordMatchValidator(formGroup: FormGroup) {
-    const password=formGroup.get("password")?.value;
-    const confirmPassword=formGroup.get("confirmPassword")?.value;
-
-    if(password==confirmPassword){
-      return null;
-    }
-    else{
-      console.log({ mismatch: true })
-      return { mismatch: true };
-    }
+  //新規会員登録
+  signupUser(){
+    const formData = this.signupForm.value;
+    console.log("formdata")
+    console.log(formData)
+    this.signupservice.signupUser(formData)
+    .subscribe(
+      response=>{
+        console.log('POSTリクエスト成功:', response);
+      }
+    )
   }
-
-  public sendData(){
-    console.log(this.name.value);
-    console.log(this.email.value);
-  }
-
-
-
 }

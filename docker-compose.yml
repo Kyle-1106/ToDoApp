@@ -17,15 +17,14 @@ services:
        - CHOKIDAR_USEPOLLING=truecd
       tty: true
       ports:
-       - '3000:3000'
+       - '3001:3001'
        #ホスト側のbackendをコンテナのappにマウント
       volumes:
        - ./backend:/app
       #起動時のカレントフォルダ
       working_dir: /app
 
-      command: 
-        sh -c 'npx tsc; npm run nodemon'
+      
   DB:
      image: 'postgres:15' 
      container_name: postgres-container
