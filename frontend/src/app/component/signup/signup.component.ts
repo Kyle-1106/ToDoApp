@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { SignupService } from '../../services/signup.service';
+import { SignupUser } from 'src/app/models/signupUser.model';
 
 @Component({
   selector: 'app-signup',
@@ -40,9 +41,13 @@ export class SignupComponent {
     console.log(formData)
     this.signupservice.signupUser(formData)
     .subscribe(
-      response=>{
-        console.log('POSTリクエスト成功:', response);
+      (signupuser)=>{
+        console.log('POSTリクエスト成功:', signupuser);
+      },
+      (error) => {
+        console.error('Error creating user:', error);
       }
     )
+    console.log("ここまで来てる")
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { SignupUser } from '../models/signupUser.model'; 
@@ -33,14 +33,16 @@ export class SignupService {
       Authorization: 'my-auth-token'
     })
   }
-  readonly url="http://localhost:3001"
+  readonly url="http://localhost:3001/api"
     
-  signupUser(signupForm:FormGroup){
+  signupUser(formData:SignupUser):Observable<SignupUser>{
     console.log("成功")
-    console.log(signupForm)
-    console.log(this.http.post<SignupUser>(this.url,signupForm,this.httpOptions))
-    return this.http.post<SignupUser>(this.url,signupForm,this.httpOptions);
+    console.log(formData)
+    console.log(typeof(this.http.post<SignupUser>(this.url,formData,this.httpOptions)))
+    return this.http.post<SignupUser>(this.url,formData,this.httpOptions)
+    .pipe(
+      tap((newsignupuser:SignupUser)=>console.log(newsignupuser))
+    );
   }
 
 }
-  
