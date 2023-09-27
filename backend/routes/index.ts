@@ -15,7 +15,8 @@ router.get('/', function(req: any, res: any, next: any) {  // 変更箇所
   res.render('index', { title: 'Express' });
 });
 
-router.post('/api', (req:any, res:any) => {
+router.post('/signup', (req:any, res:any) => {
+  console.log('POSTデータを受け取りました:', );
   const requestData = req.body;
   console.log('POSTデータを受け取りました:', requestData);
 

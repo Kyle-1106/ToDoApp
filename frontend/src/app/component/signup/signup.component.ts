@@ -37,6 +37,7 @@ export class SignupComponent {
   //新規会員登録
   signupUser(){
     const formData = this.signupForm.value;
+    console.log(2)
     this.signupservice.signupUser(formData)
     .subscribe(
       (response)=>{

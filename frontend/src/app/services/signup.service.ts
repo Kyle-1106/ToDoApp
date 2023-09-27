@@ -33,9 +33,10 @@ export class SignupService {
       Authorization: 'my-auth-token'
     })
   }
-  readonly url="http://localhost:3001/api"
+  readonly url="http://localhost:3001/user/signup"
     
   signupUser(formData:SignupUser):Observable<SignupUser>{
+    console.log(1)
     return this.http.post<SignupUser>(this.url,formData,this.httpOptions);
   }
 
