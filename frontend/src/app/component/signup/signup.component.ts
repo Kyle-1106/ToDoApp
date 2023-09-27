@@ -37,17 +37,15 @@ export class SignupComponent {
   //新規会員登録
   signupUser(){
     const formData = this.signupForm.value;
-    console.log("formdata")
-    console.log(formData)
     this.signupservice.signupUser(formData)
     .subscribe(
-      (signupuser)=>{
-        console.log('POSTリクエスト成功:', signupuser);
+      (response)=>{
+        console.log('POSTリクエスト成功:', response);
       },
       (error) => {
         console.error('Error creating user:', error);
       }
     )
-    console.log("ここまで来てる")
+
   }
 }

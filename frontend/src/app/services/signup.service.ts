@@ -36,13 +36,7 @@ export class SignupService {
   readonly url="http://localhost:3001/api"
     
   signupUser(formData:SignupUser):Observable<SignupUser>{
-    console.log("成功")
-    console.log(formData)
-    console.log(typeof(this.http.post<SignupUser>(this.url,formData,this.httpOptions)))
-    return this.http.post<SignupUser>(this.url,formData,this.httpOptions)
-    .pipe(
-      tap((newsignupuser:SignupUser)=>console.log(newsignupuser))
-    );
+    return this.http.post<SignupUser>(this.url,formData,this.httpOptions);
   }
 
 }
