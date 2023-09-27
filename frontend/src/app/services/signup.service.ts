@@ -33,7 +33,7 @@ export class SignupService {
       Authorization: 'my-auth-token'
     })
   }
-  readonly url="http://localhost:3000/api"
+  readonly url="http://localhost:3001"
     
   signupUser(signupForm:FormGroup){
     console.log("成功")

@@ -3,14 +3,14 @@ var express = require('express');
 var router = express.Router();
 const cors = require('cors');
 var app = express();
-app.use(cors({
-    //http://localhost:4200からのアクセスを受け付ける
-    origin: 'http://localhost:4200',
+// app.use(cors({
+//     //http://localhost:4200からのアクセスを受け付ける
+//     origin: 'http://localhost:4200',
 
-    credentials: true,
-    //レスポンスstatusを200に設定
-    optionsSuccessStatus: 200 
-}));
+//     credentials: true,
+//     //レスポンスstatusを200に設定
+//     optionsSuccessStatus: 200 
+// }));
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', { title: 'Express' });
