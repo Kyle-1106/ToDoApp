@@ -12,7 +12,6 @@ const userService = require('../services/userService');
 //新規会員登録
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("tryin");
         const newUser = yield userService.createUser(req.body);
         res.json(newUser);
     }

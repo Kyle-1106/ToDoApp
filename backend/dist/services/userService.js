@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const userModel = require('../models/usermodel');
 const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("サービスまできた");
     return userModel.createUsers(userData);
 });
 module.exports = {

@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const users = [];
 const createUsers = (userData) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("model");
 });
 module.exports = {
     createUsers

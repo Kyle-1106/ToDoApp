@@ -13,6 +13,7 @@ services:
       container_name: express-container
       environment:
        - DEBUG=backend:*
+
 #ホットリロード（ソースの変更を即時反映）をON
        - CHOKIDAR_USEPOLLING=truecd
       tty: true
@@ -23,6 +24,8 @@ services:
        - ./backend:/app
       #起動時のカレントフォルダ
       working_dir: /app
+      depends_on:
+      - DB
 
       
   DB:
@@ -31,8 +34,8 @@ services:
      restart: always
      environment: 
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD=: postgres_pw
-      POSTGRES_DATABASE: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
      ports: 
      - '5432:5432' 
      volumes: 
