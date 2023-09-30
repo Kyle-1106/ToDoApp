@@ -38,15 +38,14 @@ export class SignupComponent {
   signupUser(){
     const formData = this.signupForm.value;
     console.log(2)
-    this.signupservice.signupUser(formData)
-    .subscribe(
-      (response)=>{
+    this.signupservice.signupUser(formData).subscribe({
+      next: (response) => {
         console.log('POSTリクエスト成功:', response);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error creating user:', error);
-      }
-    )
+      },
+    });
 
   }
 }

@@ -9,10 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const userService = require('../services/userService');
-//新規会員登録
+//新規会員登録 
+console.log("コントローラ１");
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newUser = yield userService.createUser(req.body);
+        const userData = req.body;
+        console.log("コントローラ44");
+        const newUser = yield userService.createUser(userData);
+        console.log("newUser");
+        console.log(newUser);
         res.json(newUser);
     }
     catch (error) {

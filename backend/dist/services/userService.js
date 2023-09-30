@@ -8,10 +8,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const userModel = require('../models/usermodel');
+const { PrismaClient } = require('@prisma/client');
+const User = require('../models/usermodel');
 const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () {
-    return userModel.createUsers(userData);
+    try {
+        console.log("ここまで来てる？");
+        console.log(userData);
+        delete userData.confirmPassword;
+        console.log(userData);
+        //データ登録
+        const prisma = new PrismaClient({
+            // ログを有効化
+            log: ['query', 'info', 'warn', 'error'],
+        });
+        console.log("prisma");
+        const newUser = yield prisma.user.create({
+            data: {
+                email: userData.email,
+                name: userData.name,
+                password: userData.password
+            }
+        });
+        yield prisma.$disconnect();
+        // 新しいユーザーを返す
+        return newUser;
+        console.log(newUser);
+    }
+    catch (error) {
+        console.log("ここやで");
+        throw error;
+    }
 });
 module.exports = {
-    createUser
+    createUser,
 };

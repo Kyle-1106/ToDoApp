@@ -36,7 +36,8 @@ export class SignupService {
   readonly url="http://localhost:3001/user/signup"
     
   signupUser(formData:SignupUser):Observable<SignupUser>{
-    console.log(1)
+    console.log(formData)
+    
     return this.http.post<SignupUser>(this.url,formData,this.httpOptions);
   }
 
