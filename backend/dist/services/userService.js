@@ -10,32 +10,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const { PrismaClient } = require('@prisma/client');
 const User = require('../models/usermodel');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("ここまで来てる？");
-        console.log(userData);
         delete userData.confirmPassword;
-        console.log(userData);
         //データ登録
         const prisma = new PrismaClient({
-            // ログを有効化
+            // Prismaログを有効化
             log: ['query', 'info', 'warn', 'error'],
         });
-        console.log("prisma");
+        const hashedPassword = yield bcrypt.hash('password', saltRounds);
         const newUser = yield prisma.user.create({
             data: {
                 email: userData.email,
                 name: userData.name,
-                password: userData.password
+                password: hashedPassword
             }
         });
         yield prisma.$disconnect();
         // 新しいユーザーを返す
         return newUser;
-        console.log(newUser);
     }
     catch (error) {
-        console.log("ここやで");
+        //メールアドレス重複時の処理を後々実装予定
         throw error;
     }
 });

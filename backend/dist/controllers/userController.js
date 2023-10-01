@@ -14,10 +14,7 @@ console.log("コントローラ１");
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userData = req.body;
-        console.log("コントローラ44");
         const newUser = yield userService.createUser(userData);
-        console.log("newUser");
-        console.log(newUser);
         res.json(newUser);
     }
     catch (error) {

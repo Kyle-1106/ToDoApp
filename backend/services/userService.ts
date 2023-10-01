@@ -1,6 +1,9 @@
 
 const { PrismaClient } = require('@prisma/client');
 const User = require('../models/usermodel');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 
 const createUser = async (userData: any) => {
@@ -11,12 +14,13 @@ const createUser = async (userData: any) => {
       // Prismaログを有効化
       log: ['query', 'info', 'warn', 'error'],
     });
+    const hashedPassword = await bcrypt.hash('password', saltRounds);
    
     const newUser = await prisma.user.create({
       data: {
         email:userData.email,
         name:userData.name,
-        password:userData.password
+        password:hashedPassword
       }
        
     })
@@ -26,6 +30,7 @@ const createUser = async (userData: any) => {
     return newUser;
   } 
   catch (error) {
+   //メールアドレス重複時の処理を後々実装予定
     throw error;
   }
   
