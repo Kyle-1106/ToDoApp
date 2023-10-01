@@ -9,13 +9,14 @@ const saltRounds = 10;
 const createUser = async (userData: any) => {
   try {
     delete userData.confirmPassword;
-    //データ登録
+   
     const prisma = new PrismaClient({
       // Prismaログを有効化
       log: ['query', 'info', 'warn', 'error'],
     });
+    //パスワードハッシュ化
     const hashedPassword = await bcrypt.hash('password', saltRounds);
-   
+    //データ登録
     const newUser = await prisma.user.create({
       data: {
         email:userData.email,
