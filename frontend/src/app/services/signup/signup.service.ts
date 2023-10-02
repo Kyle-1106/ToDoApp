@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
+import { User } from 'src/app/models/user.model';
 import { Observable, catchError, tap } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { SignupUser } from '../models/signupUser.model'; 
+import { SignupUser } from 'src/app/models/signupUser.model'; 
 
 @Injectable({
   providedIn: 'root'

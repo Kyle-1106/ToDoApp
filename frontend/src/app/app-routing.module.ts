@@ -4,8 +4,8 @@ import {LoginComponent}from "./component/login/login.component";
 import { SignupComponent } from './component/signup/signup.component';
 
 const routes: Routes = [
-  {path:"signup",component:SignupComponent},
   {path:"login",component:LoginComponent},
+  {path:"signup",component:SignupComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   //後で404エラーページ作成
   { path: '**', redirectTo: '/login' } 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
-import { SignupService } from '../../services/signup.service';
+import { SignupService } from '../../services/signup/signup.service';
 import { SignupUser } from 'src/app/models/signupUser.model';
 
 @Component({
@@ -37,7 +37,6 @@ export class SignupComponent {
   //新規会員登録
   signupUser(){
     const formData = this.signupForm.value;
-    console.log(2)
     this.signupservice.signupUser(formData).subscribe({
       next: (response) => {
         console.log('POSTリクエスト成功:', response);

@@ -1,19 +1,20 @@
 
-const { PrismaClient } = require('@prisma/client');
-const User = require('../models/usermodel');
-const bcrypt = require('bcrypt');
+var { PrismaClient } = require('@prisma/client');
+
+var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+const prisma = new PrismaClient({
+  // Prismaログを有効化
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 
+//新規登録
 const createUser = async (userData: any) => {
   try {
     delete userData.confirmPassword;
    
-    const prisma = new PrismaClient({
-      // Prismaログを有効化
-      log: ['query', 'info', 'warn', 'error'],
-    });
     //パスワードハッシュ化
     const hashedPassword = await bcrypt.hash('password', saltRounds);
     //データ登録
@@ -36,7 +37,42 @@ const createUser = async (userData: any) => {
   }
   
 };
+
+//ユーザ取得
+const selectUser=async (loginData:any)=>{
+  
+  try {
+    //ユーザ取得
+    
+    console.log("ここは")
+    const email=loginData.email;
+    const prisma = new PrismaClient({
+      // Prismaログを有効化
+      log: ['query', 'info', 'warn', 'error'],
+    });
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+    console.log("ここでのuser")
+    console.log(user)
+    await prisma.$disconnect;
+    return user;
+    
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+  finally{
+    
+  }
+
+}
+
+
   module.exports={
     createUser,
+    selectUser
   }
   
