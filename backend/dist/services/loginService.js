@@ -9,18 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var bcrypt = require('bcrypt');
+//パスワード認証
 const loginCheck = (loginData, user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const hashdPassword = user.password;
         const password = loginData.password;
-        console.log(password);
-        console.log("login");
         const compare = yield bcrypt.compare(password, hashdPassword);
-        console.log("compare");
-        console.log(compare);
-        //ログイン成功時にトークン発行
-        // if(compare=1){
-        // }
+        //トークン発行
+        if (compare) {
+            console.log("成功");
+        }
+        else {
+            console.log("パスワードが正しくありません。");
+        }
     }
     catch (error) {
     }

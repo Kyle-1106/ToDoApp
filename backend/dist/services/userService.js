@@ -20,8 +20,8 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         delete userData.confirmPassword;
         //パスワードハッシュ化
-        const hashedPassword = yield bcrypt.hash('password', saltRounds);
-        //データ登録
+        const hashedPassword = yield bcrypt.hash(userData.password, saltRounds);
+        //会員登録
         const newUser = yield prisma.user.create({
             data: {
                 email: userData.email,
@@ -30,7 +30,6 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
             }
         });
         yield prisma.$disconnect();
-        // 新しいユーザーを返す
         return newUser;
     }
     catch (error) {
@@ -41,28 +40,18 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
 //ユーザ取得
 const selectUser = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        //ユーザ取得
-        console.log("ここは");
         const email = loginData.email;
-        const prisma = new PrismaClient({
-            // Prismaログを有効化
-            log: ['query', 'info', 'warn', 'error'],
-        });
         const user = yield prisma.user.findFirst({
             where: {
                 email,
             },
         });
-        console.log("ここでのuser");
-        console.log(user);
         yield prisma.$disconnect;
         return user;
     }
     catch (error) {
         console.log(error);
         throw error;
-    }
-    finally {
     }
 });
 module.exports = {

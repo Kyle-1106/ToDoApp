@@ -15,7 +15,6 @@ const signup = async (req: any, res: any) => {
   };
 
 //ユーザ取得
-
   const getUser = async (loginData:any, res:any) =>{
     try {
       const email=loginData.email;
@@ -24,10 +23,7 @@ const signup = async (req: any, res: any) => {
       res.json(user);
       
     } catch (error) {
-      console.log("error")
-      console.log(error)
       res.status(500).json({ error: 'ユーザー情報の取得に失敗しました。' });
-      // console.log(error)
     }
     
   };

@@ -16,19 +16,17 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const loginData = req.body;
         console.log("loginData");
-        console.log(loginData);
+        console.log(typeof loginData);
         //ユーザ取得
         const user = yield userService.selectUser(loginData);
-        console.log("userここまで");
-        console.log(user);
+        console.log("成功?");
         //パスワード認証 
         const login = yield loginService.loginCheck(loginData, user);
-        //   const newUser = await userService.createUser(use);
+        console.log("成功!");
         //   res.json(newUser);
     }
     catch (error) {
-        // res.status(500).json({ error: 'ユーザー情報の取得に失敗しました。' });
-        // console.log(error)
+        res.status(500).json({ error: 'ユーザー情報の取得に失敗しました。' });
     }
 });
 module.exports = {

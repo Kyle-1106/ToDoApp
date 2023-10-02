@@ -14,10 +14,9 @@ const prisma = new PrismaClient({
 const createUser = async (userData: any) => {
   try {
     delete userData.confirmPassword;
-   
     //パスワードハッシュ化
-    const hashedPassword = await bcrypt.hash('password', saltRounds);
-    //データ登録
+    const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+    //会員登録
     const newUser = await prisma.user.create({
       data: {
         email:userData.email,
@@ -27,8 +26,6 @@ const createUser = async (userData: any) => {
        
     })
     await prisma.$disconnect();
-
-    // 新しいユーザーを返す
     return newUser;
   } 
   catch (error) {
@@ -38,34 +35,23 @@ const createUser = async (userData: any) => {
   
 };
 
+
+
 //ユーザ取得
 const selectUser=async (loginData:any)=>{
-  
   try {
-    //ユーザ取得
-    
-    console.log("ここは")
     const email=loginData.email;
-    const prisma = new PrismaClient({
-      // Prismaログを有効化
-      log: ['query', 'info', 'warn', 'error'],
-    });
     const user = await prisma.user.findFirst({
       where: {
         email,
       },
     });
-    console.log("ここでのuser")
-    console.log(user)
     await prisma.$disconnect;
     return user;
     
   } catch (error) {
     console.log(error)
     throw error;
-  }
-  finally{
-    
   }
 
 }
