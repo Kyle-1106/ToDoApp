@@ -9,20 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var loginService = require('../services/loginService');
-var userService = require('../services/userService');
 var bcrypt = require('bcrypt');
+var passport = require('passport');
 //ログイン処理
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const loginData = req.body;
-        console.log("loginData");
-        console.log(typeof loginData);
-        //ユーザ取得
-        const user = yield userService.selectUser(loginData);
-        console.log("成功?");
-        //パスワード認証 
-        const login = yield loginService.loginCheck(loginData, user);
-        console.log("成功!");
+        //ログイン処理
+        const login = yield loginService.loginCheck(loginData);
+        console.log("login");
+        console.log(login);
         //   res.json(newUser);
     }
     catch (error) {

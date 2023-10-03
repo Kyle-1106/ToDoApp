@@ -1,14 +1,21 @@
+
+
 var createError = require('http-errors');
 var express = require('express');
+var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+// var passport = require('passport');
+// var LocalStrategy = require('passport-local').Strategy;
+// var session = require('express-session');
+
+
 var userRouter = require('./routes/userRoutes');
 var loginRouter = require('./routes/loginRoutes');
 
-var app = express();
 
 //CORS許可
 const cors = require('cors');
@@ -17,6 +24,20 @@ app.use(cors({
     credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
     optionsSuccessStatus: 200 //レスポンスstatusを200に設定
 }))
+
+const secretKey = 'your-secret-key';
+
+// //passport関連
+// app.use(express.urlencoded({ extended: true }));
+// app.use(session({ 
+//   secret: 'your-secret-key', 
+//   resave: false, 
+//   saveUninitialized: false }));
+// app.use(passport.initialize());
+// app.use(passport.session())
+
+
+
 
 
 
@@ -30,6 +51,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join('public')));
 
+
+//ルーティング処理
 app.use('/user', userRouter);
 app.use("/login",loginRouter);
 

@@ -8,20 +8,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var userService = require('../services/userService');
 var bcrypt = require('bcrypt');
-//パスワード認証
-const loginCheck = (loginData, user) => __awaiter(void 0, void 0, void 0, function* () {
+var jwt = require('jsonwebtoken');
+var config = require('../config/jwt.config');
+//パスワード認証とトークン発行
+const loginCheck = (loginData, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        //該当ユーザ取得
+        const user = yield userService.selectUser(loginData);
         const hashdPassword = user.password;
         const password = loginData.password;
+        console.log("toddkne");
+        //パスワード認証
         const compare = yield bcrypt.compare(password, hashdPassword);
-        //トークン発行
+        console.log("tokdadane");
         if (compare) {
-            console.log("成功");
-        }
-        else {
             console.log("パスワードが正しくありません。");
         }
+        console.log("tokn111111e");
+        console.log(user);
+        const payload = {
+            email: user.email
+        };
+        const token = jwt.sign(payload, config.jwt.secret, config.jwt.options);
+        console.log("tokne");
+        console.log(token);
+        const body = {
+            email: user.email,
+            token: token,
+        };
+        res.json(body);
     }
     catch (error) {
     }

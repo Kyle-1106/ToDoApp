@@ -15,7 +15,9 @@ const createUser = async (userData: any) => {
   try {
     delete userData.confirmPassword;
     //パスワードハッシュ化
+    console.log(2)
     const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+    console.log(3)
     //会員登録
     const newUser = await prisma.user.create({
       data: {
@@ -26,6 +28,7 @@ const createUser = async (userData: any) => {
        
     })
     await prisma.$disconnect();
+    console.log(4)
     return newUser;
   } 
   catch (error) {
@@ -41,9 +44,9 @@ const createUser = async (userData: any) => {
 const selectUser=async (loginData:any)=>{
   try {
     const email=loginData.email;
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
-        email,
+        email:email
       },
     });
     await prisma.$disconnect;
