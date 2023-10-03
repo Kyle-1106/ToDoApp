@@ -1,6 +1,5 @@
 var loginService = require('../services/loginService');
 var bcrypt = require('bcrypt');
-var passport = require('passport');
 
 
 

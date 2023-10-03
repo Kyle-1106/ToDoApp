@@ -7,12 +7,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
-// var session = require('express-session');
-
-
 var userRouter = require('./routes/userRoutes');
 var loginRouter = require('./routes/loginRoutes');
 
@@ -26,17 +20,6 @@ app.use(cors({
 }))
 
 const secretKey = 'your-secret-key';
-
-// //passport関連
-// app.use(express.urlencoded({ extended: true }));
-// app.use(session({ 
-//   secret: 'your-secret-key', 
-//   resave: false, 
-//   saveUninitialized: false }));
-// app.use(passport.initialize());
-// app.use(passport.session())
-
-
 
 
 
