@@ -20,8 +20,6 @@ class AuthGuard{
   }
 }
 
-
-
 export const authGuard: CanActivateFn = (next:ActivatedRouteSnapshot,state:RouterStateSnapshot):boolean => {
   return inject(AuthGuard).canActivate(next,state)
 }

@@ -13,6 +13,7 @@ import { Auth } from 'src/app/models/auth.model';
 export class LoginService {
 
   constructor(private http:HttpClient) { }
+
   //HeaderOptionの設定
   readonly httpOptions = {
     headers: new HttpHeaders({
@@ -22,6 +23,8 @@ export class LoginService {
   }
   readonly url="http://localhost:3001/login"
 
+
+  
 //ログイン処理
   login(loginForm:Login):Observable<Auth>{
     //ログイン情報送信
