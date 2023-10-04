@@ -5,9 +5,6 @@ var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
-// var session = require('express-session');
 var userRouter = require('./routes/userRoutes');
 var loginRouter = require('./routes/loginRoutes');
 //CORS許可
@@ -17,15 +14,6 @@ app.use(cors({
     credentials: true,
     optionsSuccessStatus: 200 //レスポンスstatusを200に設定
 }));
-const secretKey = 'your-secret-key';
-// //passport関連
-// app.use(express.urlencoded({ extended: true }));
-// app.use(session({ 
-//   secret: 'your-secret-key', 
-//   resave: false, 
-//   saveUninitialized: false }));
-// app.use(passport.initialize());
-// app.use(passport.session())
 // view engine setup
 app.set('views', path.join('views'));
 app.set('view engine', 'jade');
@@ -51,3 +39,4 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 module.exports = app;
+//# sourceMappingURL=app.js.map

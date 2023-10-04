@@ -24,9 +24,10 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 //ユーザ取得
 const getUser = (loginData, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const email = loginData.email;
         //ユーザ取得
-        const login = loginService.loginCheck(loginData);
-        res.json();
+        const user = yield userService.selectUser(email);
+        res.json(user);
     }
     catch (error) {
         res.status(500).json({ error: 'ユーザー情報の取得に失敗しました。' });
@@ -36,3 +37,4 @@ module.exports = {
     signup,
     getUser
 };
+//# sourceMappingURL=userController.js.map

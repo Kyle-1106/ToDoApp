@@ -20,9 +20,7 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         delete userData.confirmPassword;
         //パスワードハッシュ化
-        console.log(2);
         const hashedPassword = yield bcrypt.hash(userData.password, saltRounds);
-        console.log(3);
         //会員登録
         const newUser = yield prisma.user.create({
             data: {
@@ -32,7 +30,6 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
             }
         });
         yield prisma.$disconnect();
-        console.log(4);
         return newUser;
     }
     catch (error) {
@@ -42,13 +39,17 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
 });
 //ユーザ取得
 const selectUser = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("userss");
     try {
         const email = loginData.email;
+        console.log("userssdd");
         const user = yield prisma.user.findUnique({
             where: {
                 email: email
             },
         });
+        console.log("userdadadss");
+        console.log(user);
         yield prisma.$disconnect;
         return user;
     }
@@ -61,3 +62,4 @@ module.exports = {
     createUser,
     selectUser
 };
+//# sourceMappingURL=userService.js.map

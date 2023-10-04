@@ -8,3 +8,4 @@ module.exports = {
         }
     }
 };
+//# sourceMappingURL=jwt.config.js.map

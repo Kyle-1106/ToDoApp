@@ -19,10 +19,6 @@ app.use(cors({
     optionsSuccessStatus: 200 //レスポンスstatusを200に設定
 }))
 
-const secretKey = 'your-secret-key';
-
-
-
 
 // view engine setup
 app.set('views', path.join('views'));
