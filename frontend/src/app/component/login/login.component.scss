@@ -41,7 +41,14 @@
         font-size: 12px;
       }
     }
-
+    .errorMessage {
+      color: red; // エラーメッセージの文字色
+      font-size: 12px;
+      margin-top: 5px; // エラーメッセージの上部のマージンを追加
+    }
+    
+    
+  
     button {
       background-color: #007bff; // ボタンの背景色を設定
       color: #fff; // ボタンのテキスト色を設定

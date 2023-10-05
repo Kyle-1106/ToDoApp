@@ -35,7 +35,7 @@ export class LoginComponent {
         },
         error: (error) => {
           console.error('Error login:', error);
-          this.errorMessage = error; 
+          this.errorMessage ="メールアドレスかパスワードが間違っています"; 
         },
       })
     }
