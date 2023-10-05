@@ -5,6 +5,8 @@ import { Login } from 'src/app/models/login.model';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Token } from '@angular/compiler';
 import { Auth } from 'src/app/models/auth.model';
+import { HttpOptions } from 'src/app/config/httpOption';
+
 
 
 
@@ -13,19 +15,11 @@ import { Auth } from 'src/app/models/auth.model';
 })
 export class LoginService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private httpoption:HttpOptions) { }
 
   //HeaderOptionの設定
-  readonly httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      Authorization: 'my-auth-token'
-    })
-  }
+  readonly httpOptions=this.httpoption.httpOptions
   readonly url="http://localhost:3001/login"
-
-
-  
 //ログイン処理
 login(loginForm: Login): Observable<Auth> {
   // ログイン情報を送信
@@ -37,8 +31,9 @@ login(loginForm: Login): Observable<Auth> {
 }
 
   //トークンの保存
-  storeToken(response:Auth):void{
+  saveToken(response:Auth):void{
     localStorage.setItem("jwt",response.token);
+    localStorage.setItem("email",response.email);
   }
 
   //トークンの取得

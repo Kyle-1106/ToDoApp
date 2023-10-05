@@ -5,6 +5,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { SignupUser } from 'src/app/models/signupUser.model'; 
+import { HttpOptions } from 'src/app/config/httpOption';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +24,9 @@ export class SignupService {
     }
   }
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private httpoption:HttpOptions) { }
   //HeaderOptionの設定
-  readonly httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      Authorization: 'my-auth-token'
-    })
-  }
+  readonly httpOptions =this.httpoption.httpOptions
   readonly url="http://localhost:3001/user/signup"
   signupUser(formData:SignupUser):Observable<SignupUser>{
     return this.http.post<SignupUser>(this.url,formData,this.httpOptions).pipe(

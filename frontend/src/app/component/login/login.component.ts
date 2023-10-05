@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import { Login } from 'src/app/models/login.model';
+import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login/login.service';
 
 
@@ -13,7 +15,6 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage:string;
-
   constructor(private formBuilder: FormBuilder,private loginService:LoginService,private router:Router) {
     //バリデーション追加
     this.loginForm = this.formBuilder.group({
@@ -23,15 +24,16 @@ export class LoginComponent {
     this.errorMessage=""
   }
 //ログイン処理
-  onLogin() {
+  onLogin():void{
     if (this.loginForm.valid) {
       //フォームが有効な場合、ここで送信処理を実行
       const formData = this.loginForm.value;
       this.loginService.login(formData).subscribe({
         next: (response) => {
           //JWTの保存
-          this.loginService.storeToken(response);
-          this.router.navigate(["/home"]);
+          this.loginService.saveToken(response);
+          const email=localStorage.getItem("email")
+          this.router.navigate(["/home",email]);
         },
         error: (error) => {
           console.error('Error login:', error);
