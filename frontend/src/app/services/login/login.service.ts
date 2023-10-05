@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Login } from 'src/app/models/login.model';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Token } from '@angular/compiler';
 import { Auth } from 'src/app/models/auth.model';
+
 
 
 @Injectable({
@@ -26,10 +27,14 @@ export class LoginService {
 
   
 //ログイン処理
-  login(loginForm:Login):Observable<Auth>{
-    //ログイン情報送信
-    return this.http.post<Auth>(this.url,loginForm,this.httpOptions);
-  }
+login(loginForm: Login): Observable<Auth> {
+  // ログイン情報を送信
+  return this.http.post<Auth>(this.url, loginForm, this.httpOptions).pipe(
+    catchError((error) => {
+      return throwError('ログインに失敗しました。');
+    })
+  );
+}
 
   //トークンの保存
   storeToken(response:Auth):void{

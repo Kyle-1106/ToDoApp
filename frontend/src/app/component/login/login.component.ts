@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 import { LoginService } from 'src/app/services/login/login.service';
 
 
@@ -11,6 +12,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage:string;
 
   constructor(private formBuilder: FormBuilder,private loginService:LoginService,private router:Router) {
     //バリデーション追加
@@ -18,6 +20,7 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.errorMessage=""
   }
 //ログイン処理
   onLogin() {
@@ -32,6 +35,7 @@ export class LoginComponent {
         },
         error: (error) => {
           console.error('Error login:', error);
+          this.errorMessage = error; 
         },
       })
     }
