@@ -23,6 +23,7 @@ const loginCheck=async (loginData:Login,jwtBody:JWT) =>{
         }
         //jwtの作成
         const payload = {
+            id:user.id,
             email: user.email
           };
         const token=jwt.sign(payload,config.jwt.secret,config.jwt.options);
@@ -36,8 +37,6 @@ const loginCheck=async (loginData:Login,jwtBody:JWT) =>{
     }
     
 }
-
-
 module.exports={
     loginCheck,
   }

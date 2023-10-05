@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { SignupUser } from "../models/signupUser";
+import { Login } from "../models/login";
 
 var userService = require('../services/userService');
 var express = require('express');
@@ -18,7 +19,7 @@ const signup = async (req:any, res: any) => {
   };
 
 //ユーザ取得
-  const getUser = async (loginData:any, res:any) =>{
+  const getUser = async (loginData:Logingit, res:any) =>{
     try {
       const email=loginData.email;
       //ユーザ取得
