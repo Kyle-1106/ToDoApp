@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 
 var { PrismaClient } = require('@prisma/client');
 
@@ -5,7 +6,6 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const prisma = new PrismaClient({
-  // Prismaログを有効化
   log: ['query', 'info', 'warn', 'error'],
 });
 
@@ -38,29 +38,24 @@ const createUser = async (userData: any) => {
 
 
 //ユーザ取得
-const selectUser=async (loginData:any)=>{
-  console.log("userss");
+const selectUser=async (loginData:any,user:User)=>{
   try {
     const email=loginData.email;
-    console.log("userssdd");
-    const user = await prisma.user.findUnique({
+    const user:User= await prisma.user.findUnique({
       where: {
         email:email
       },
-    });
-    console.log("userdadadss");
-    console.log(user);
+    })
+    if(!user){
+      throw new Error("該当ユーザが見つかりません")
+    }
     await prisma.$disconnect;
     return user;
     
   } catch (error) {
     console.log(error)
-    throw error;
   }
-
 }
-
-
   module.exports={
     createUser,
     selectUser

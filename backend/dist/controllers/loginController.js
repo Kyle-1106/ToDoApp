@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var loginService = require('../services/loginService');
 var bcrypt = require('bcrypt');
 //ログイン処理
@@ -15,14 +16,14 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const loginData = req.body;
         //ログイン処理
-        console.log("ここきてwる");
         const loginToken = yield loginService.loginCheck(loginData);
-        console.log("loginToken");
-        console.log(loginToken);
-        res.json(loginToken);
+        if (!loginToken) {
+            throw new Error("トークンの作成に失敗しました");
+        }
+        res.status(200).json(loginToken);
     }
     catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ error: 'ユーザー情報の取得に失敗しました。' });
     }
 });

@@ -8,11 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var { PrismaClient } = require('@prisma/client');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const prisma = new PrismaClient({
-    // Prismaログを有効化
     log: ['query', 'info', 'warn', 'error'],
 });
 //新規登録
@@ -38,24 +38,22 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 //ユーザ取得
-const selectUser = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("userss");
+const selectUser = (loginData, user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const email = loginData.email;
-        console.log("userssdd");
         const user = yield prisma.user.findUnique({
             where: {
                 email: email
             },
         });
-        console.log("userdadadss");
-        console.log(user);
+        if (!user) {
+            throw new Error("該当ユーザが見つかりません");
+        }
         yield prisma.$disconnect;
         return user;
     }
     catch (error) {
         console.log(error);
-        throw error;
     }
 });
 module.exports = {

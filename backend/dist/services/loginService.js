@@ -8,41 +8,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var userService = require('../services/userService');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var config = require('../config/jwt.config');
 //パスワード認証とトークン発行
-const loginCheck = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
+const loginCheck = (loginData, jwtBody) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //該当ユーザ取得
         const user = yield userService.selectUser(loginData);
-        console.log("user");
-        console.log(user);
         //パスワード認証
         const hashdPassword = user.password;
         const password = loginData.password;
         const compare = yield bcrypt.compare(password, hashdPassword);
-        console.log("ここきてる");
         if (!compare) {
-            console.log("パスワードが正しくありません。");
             throw new Error("パスワードが正しくありません");
         }
+        //jwtの作成
         const payload = {
             email: user.email
         };
-        console.log("ここきてdada");
         const token = jwt.sign(payload, config.jwt.secret, config.jwt.options);
-        const body = {
+        const jwtBody = {
             email: user.email,
             token: token,
         };
-        console.log("body");
-        console.log(body);
-        console.log("res.json(body)");
-        return body;
+        return jwtBody;
     }
     catch (error) {
+        console.log(error);
     }
 });
 module.exports = {
