@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user.model';
-import { Observable, catchError, tap } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { SignupUser } from 'src/app/models/signupUser.model'; 
@@ -12,15 +12,13 @@ import { SignupUser } from 'src/app/models/signupUser.model';
 
 export class SignupService {
   //再入力したパスワードが一致するかバリデーション
-  public passwordMatchValidator(formGroup: FormGroup){
+  public passwordMatchValidator(formGroup: FormGroup):object{
     const password=formGroup.get("password")?.value;
     const confirmPassword=formGroup.get("confirmPassword")?.value;
-
     if(password==confirmPassword){
-      return null;
+      return {mismatch:false};
     }
     else{
-      console.log({ mismatch: true })
       return { mismatch: true };
     }
   }
@@ -34,11 +32,12 @@ export class SignupService {
     })
   }
   readonly url="http://localhost:3001/user/signup"
-    
   signupUser(formData:SignupUser):Observable<SignupUser>{
-    console.log(formData)
-    
-    return this.http.post<SignupUser>(this.url,formData,this.httpOptions);
+    return this.http.post<SignupUser>(this.url,formData,this.httpOptions).pipe(
+      catchError((error) => {
+        return throwError("入力されたメールアドレスはすでに登録されています")
+      })
+    );
   }
 
 }

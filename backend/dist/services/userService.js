@@ -22,7 +22,7 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
         //パスワードハッシュ化
         const hashedPassword = yield bcrypt.hash(userData.password, saltRounds);
         //会員登録
-        const newUser = yield prisma.user.create({
+        const createdUser = yield prisma.user.create({
             data: {
                 email: userData.email,
                 name: userData.name,
@@ -30,11 +30,11 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
             }
         });
         yield prisma.$disconnect();
-        return newUser;
+        return createdUser;
     }
     catch (error) {
-        //メールアドレス重複時の処理を後々実装予定
-        throw error;
+        yield prisma.$disconnect();
+        throw new Error("そのメールアドレスはすでに登録されています");
     }
 });
 //ユーザ取得

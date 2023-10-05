@@ -8,17 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var userService = require('../services/userService');
 var express = require('express');
 //新規会員登録 
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userData = req.body;
-        const newUser = yield userService.createUser(userData);
-        res.json(newUser);
+        const createdUser = yield userService.createUser(userData);
+        res.json(createdUser);
     }
     catch (error) {
-        res.status(500).json({ error: 'ユーザーの作成に失敗しました。' });
+        res.status(500).json({ error: 'そのメールアドレスはすでに登録されています' });
     }
 });
 //ユーザ取得

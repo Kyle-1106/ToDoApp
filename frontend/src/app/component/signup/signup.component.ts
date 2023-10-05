@@ -14,6 +14,7 @@ export class SignupComponent {
   email:FormControl;
   password:FormControl;
   confirmPassword:FormControl;
+  errorMessage:string;  
 
   constructor(private formBuilder:FormBuilder,private signupservice:SignupService){
     //各項目にバリデーション追加
@@ -22,7 +23,7 @@ export class SignupComponent {
     this.password=new FormControl("",[Validators.required,Validators.minLength(6)]);
     this.confirmPassword=new FormControl("",[Validators.required]);
 
-
+    //form全体に対するバリデーションを定義する
     this.signupForm=this.formBuilder.group({
       name:this.name,
       email:this.email,
@@ -32,6 +33,8 @@ export class SignupComponent {
     {//カスタムバリデーション
       validators: this.signupservice.passwordMatchValidator
     })
+
+    this.errorMessage="";
   }
 
   //新規会員登録
@@ -43,6 +46,7 @@ export class SignupComponent {
       },
       error: (error) => {
         console.error('Error creating user:', error);
+        this.errorMessage=error;
       },
     });
 

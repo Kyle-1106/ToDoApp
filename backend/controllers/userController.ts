@@ -1,16 +1,19 @@
+import { User } from "@prisma/client";
+import { SignupUser } from "../models/signupUser";
+
 var userService = require('../services/userService');
 var express = require('express');
 
 
 
 //新規会員登録 
-const signup = async (req: any, res: any) => {
+const signup = async (req:any, res: any) => {
     try {
       const userData=req.body;
-      const newUser = await userService.createUser(userData);
-      res.json(newUser);
+      const createdUser:User = await userService.createUser(userData);
+      res.json(createdUser);
     } catch (error) {
-      res.status(500).json({ error: 'ユーザーの作成に失敗しました。' });
+      res.status(500).json({ error: 'そのメールアドレスはすでに登録されています' });
     }
   };
 

@@ -15,22 +15,21 @@ const createUser = async (userData: any) => {
   try {
     delete userData.confirmPassword;
     //パスワードハッシュ化
-    const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+    const hashedPassword:string = await bcrypt.hash(userData.password, saltRounds);
     //会員登録
-    const newUser = await prisma.user.create({
+    const createdUser:User = await prisma.user.create({
       data: {
         email:userData.email,
         name:userData.name,
         password:hashedPassword
       }
-       
     })
     await prisma.$disconnect();
-    return newUser;
+    return createdUser;
   } 
   catch (error) {
-   //メールアドレス重複時の処理を後々実装予定
-    throw error;
+    await prisma.$disconnect();
+    throw new Error("そのメールアドレスはすでに登録されています");
   }
   
 };

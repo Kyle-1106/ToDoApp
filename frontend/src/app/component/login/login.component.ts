@@ -25,7 +25,7 @@ export class LoginComponent {
 //ログイン処理
   onLogin() {
     if (this.loginForm.valid) {
-      // フォームが有効な場合、ここで送信処理を実行
+      //フォームが有効な場合、ここで送信処理を実行
       const formData = this.loginForm.value;
       this.loginService.login(formData).subscribe({
         next: (response) => {
