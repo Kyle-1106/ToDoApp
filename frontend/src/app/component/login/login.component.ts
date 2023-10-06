@@ -32,8 +32,9 @@ export class LoginComponent {
         next: (response) => {
           //JWTの保存
           this.loginService.saveToken(response);
+          //ホーム画面への遷移
           const email=localStorage.getItem("email")
-          this.router.navigate(["/home",email]);
+          this.router.navigate(["/home"],{queryParams:{email:email}});
         },
         error: (error) => {
           console.error('Error login:', error);

@@ -8,8 +8,8 @@ import { authGuard } from './guard/auth.guard';
 const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"signup",component:SignupComponent},
-  {path:"home/:email",component:HomeComponent,canActivate:[authGuard]},
-  // { path: '', redirectTo: '/login', pathMatch: 'full' }, 
+  {path:"home",component:HomeComponent,canActivate:[authGuard]},
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   // //後で404エラーページ作成
   // { path: '**', redirectTo: '/login' } 
   

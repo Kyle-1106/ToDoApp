@@ -19,7 +19,7 @@ const signup = async (req:any, res: any) => {
   };
 
 //ユーザ取得
-  const getUser = async (loginData:Logingit, res:any) =>{
+  const getUser = async (loginData:Login, res:any) =>{
     try {
       const email=loginData.email;
       //ユーザ取得
@@ -31,8 +31,6 @@ const signup = async (req:any, res: any) => {
     }
     
   };
-
-
 
 module.exports={
     signup,
