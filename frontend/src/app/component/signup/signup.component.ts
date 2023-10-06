@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { SignupService } from '../../services/signup/signup.service';
 import { SignupUser } from 'src/app/models/signupUser.model';
+import { LoginService } from 'src/app/services/login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +18,7 @@ export class SignupComponent {
   confirmPassword:FormControl;
   errorMessage:string;  
 
-  constructor(private formBuilder:FormBuilder,private signupservice:SignupService){
+  constructor(private formBuilder:FormBuilder,private signupservice:SignupService,private loginService:LoginService,private router:Router){
     //各項目にバリデーション追加
     this.name=new FormControl("",[Validators.required]);
     this.email=new  FormControl("",[Validators.required,Validators.email]);
@@ -43,6 +45,8 @@ export class SignupComponent {
     this.signupservice.signupUser(formData).subscribe({
       next: (response) => {
         console.log('POSTリクエスト成功:', response);
+        this.loginService.saveToken(response)
+        this.router.navigate(["/home"],{queryParams:{email:this.email}});
       },
       error: (error) => {
         console.error('Error creating user:', error);

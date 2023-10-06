@@ -27,6 +27,7 @@ const loginCheck = (loginData, jwtBody) => __awaiter(void 0, void 0, void 0, fun
         }
         //jwtの作成
         const payload = {
+            id: user.id,
             email: user.email
         };
         const token = jwt.sign(payload, config.jwt.secret, config.jwt.options);

@@ -11,12 +11,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 var userService = require('../services/userService');
 var express = require('express');
+var loginService = require('../services/loginService');
 //新規会員登録 
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userData = req.body;
+        console.log(userData);
+        console.log(typeof userData);
         const createdUser = yield userService.createUser(userData);
-        res.json(createdUser);
+        const signupData = { "email": userData.email, "password": userData.password };
+        const loginToken = yield loginService.loginCheck(signupData);
+        if (!loginToken) {
+            throw new Error("トークンの作成に失敗しました");
+        }
+        res.status(200).json(loginToken);
     }
     catch (error) {
         res.status(500).json({ error: 'そのメールアドレスはすでに登録されています' });
