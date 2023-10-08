@@ -4,11 +4,13 @@ import {LoginComponent}from "./component/login/login.component";
 import { SignupComponent } from './component/signup/signup.component';
 import { HomeComponent } from './component/home/home.component';
 import { authGuard } from './guard/auth.guard';
+import { WorkoutComponent } from './component/workout/workout.component';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"signup",component:SignupComponent},
   {path:"home",component:HomeComponent,canActivate:[authGuard]},
+  {path:"workout",component:WorkoutComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   // //後で404エラーページ作成
   // { path: '**', redirectTo: '/login' } 

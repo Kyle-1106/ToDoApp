@@ -10,15 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var userService = require('../services/userService');
-var express = require('express');
 var loginService = require('../services/loginService');
 //新規会員登録 
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userData = req.body;
-        console.log(userData);
-        console.log(typeof userData);
         const createdUser = yield userService.createUser(userData);
+        //JWT設定
         const signupData = { "email": userData.email, "password": userData.password };
         const loginToken = yield loginService.loginCheck(signupData);
         if (!loginToken) {

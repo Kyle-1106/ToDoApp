@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var userRouter = require('./routes/userRoutes');
 var loginRouter = require('./routes/loginRoutes');
+var workoutRouter = require('./routes/workoutRoutes');
 //CORS許可
 const cors = require('cors');
 app.use(cors({
@@ -25,6 +26,7 @@ app.use(express.static(path.join('public')));
 //ルーティング処理
 app.use('/user', userRouter);
 app.use("/login", loginRouter);
+app.use("/workout", workoutRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

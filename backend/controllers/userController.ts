@@ -3,7 +3,6 @@ import { SignupUser } from "../models/signupUser";
 import { Login } from "../models/login";
 
 var userService = require('../services/userService');
-var express = require('express');
 import { JWT } from "../models/jwt";
 
 var loginService = require('../services/loginService');

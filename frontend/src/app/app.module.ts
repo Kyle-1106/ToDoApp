@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
+import { WorkoutComponent } from './component/workout/workout.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HomeComponent } from './component/home/home.component';
     LoginComponent,
     SignupComponent,
     HomeComponent,
+    WorkoutComponent,
     
   ],
   imports: [
