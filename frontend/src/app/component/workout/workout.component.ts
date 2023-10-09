@@ -11,6 +11,7 @@ import { WorkoutService } from 'src/app/services/workout/workout.service';
 export class WorkoutComponent {
   errorMessage:string;  
   bodyPart:BodyPart[];
+  selectedBodyPart:string;
   // registWorkoutForm:FormGroup;
   // bodyPartName:FormControl;
   // traininigDisciplinesName:FormControl;
@@ -25,13 +26,13 @@ export class WorkoutComponent {
   }
 
   ngOnInit(){
-    //セレクトボックス内容取得
+  //セレクトボックス内容取得
     //部位名取得
-    console.log('部位取得成功:');
     this.workoutService.getBodyParts().subscribe({
       next:(response)=>{
         console.log('部位取得成功:', response);
-        const bodyPart:BodyPart[]=response;
+        this.bodyPart=response;
+
       },
       error:(error)=>{
         console.error('Error creating user:', error);
