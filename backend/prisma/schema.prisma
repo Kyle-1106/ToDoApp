@@ -14,9 +14,36 @@ model User {
   email String  @unique
   name  String
   password String
+  WorkoutLogs WorkoutLog[]
 }
 
 model Bodypart {
   id    Int     @id @default(autoincrement())
   name  String  @unique
+  Training_disciplines Training_discipline[]
+  WorkoutLogs WorkoutLog[]
+}
+
+model Training_discipline {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  bodypart Bodypart @relation(fields:[bodypartId],references: [id])
+  bodypartId Int
+  WorkoutLogs WorkoutLog[]
+}
+
+model WorkoutLog{
+  id Int @id @default(autoincrement())
+  user User @relation(fields:[userId],references: [id])
+  userId Int
+  bodypart Bodypart @relation(fields:[bodypartId],references: [id])
+  bodypartId Int
+  training_discipline Training_discipline @relation(fields:[training_disciplineId],references: [id])
+  training_disciplineId Int
+  created_at DateTime @default(now()) 
+  updated_at DateTime @updatedAt
+  weight Int
+  rep Int
+  RM Int
+  memo String
 }
