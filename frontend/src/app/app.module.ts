@@ -11,6 +11,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
 import { WorkoutComponent } from './component/workout/workout.component';
+import { SelectBodypartComponent } from './component/select-bodypart/select-bodypart.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { WorkoutComponent } from './component/workout/workout.component';
     SignupComponent,
     HomeComponent,
     WorkoutComponent,
+    SelectBodypartComponent,
     
   ],
   imports: [
