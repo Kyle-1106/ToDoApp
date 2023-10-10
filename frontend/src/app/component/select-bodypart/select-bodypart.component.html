@@ -2,12 +2,17 @@
     <div class="greeting">
         <p>部位を選んでください</p>
     </div>
-    <div class="bodypart-buttons">
-        <button class="btn chest-btn" routerLink="workout/chest">胸</button>
-        <button class="btn back-btn" routerLink="workout/back">背中</button>
-        <button class="btn leg-btn" routerLink="workout/leg">脚</button>
-        <button class="btn shoulder-btn" routerLink="workout/shoulder">肩</button>
-        <button class="btn arm-btn" routerLink="workout/arm">腕</button>
-        <button class="btn abs-btn" routerLink="workout/abs">腹</button>       
+    <div>
+        <app-select-training-discipline [bodyPart]="bodyPart"></app-select-training-discipline>
+
     </div>
+    <div class="bodypart-buttons">
+        <button type="submit" class="btn chest-btn" (click)="navigateToTrainingDiscipline('chest')">胸</button>
+        <button type="submit" class="btn back-btn" (click)="navigateToTrainingDiscipline('back')">背中</button>
+        <button type="submit" class="btn leg-btn" (click)="navigateToTrainingDiscipline('leg')">脚</button>
+        <button type="submit" class="btn shoulder-btn" (click)="navigateToTrainingDiscipline('shoulder')">肩</button>
+        <button type="submit" class="btn arm-btn" (click)="navigateToTrainingDiscipline('arm')">腕</button>
+        <button type="submit" class="btn abs-btn" (click)="navigateToTrainingDiscipline('abs')">腹</button>       
+    </div>
+    
 </div>

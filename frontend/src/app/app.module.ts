@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
 import { WorkoutComponent } from './component/workout/workout.component';
 import { SelectBodypartComponent } from './component/select-bodypart/select-bodypart.component';
+import { SelectTrainingDisciplineComponent } from './component/select-training-discipline/select-training-discipline.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SelectBodypartComponent } from './component/select-bodypart/select-body
     HomeComponent,
     WorkoutComponent,
     SelectBodypartComponent,
+    SelectTrainingDisciplineComponent,
     
   ],
   imports: [

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-bodypart',
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./select-bodypart.component.scss']
 })
 export class SelectBodypartComponent {
-  constructor(){}
+  public bodyPart:string;
+  constructor(private router:Router){}
+  
+  navigateToTrainingDiscipline(bodyPart:string){
+    this.bodyPart=bodyPart;
+    this.router.navigate(["home/workout/selectTrainingDiscipline"]);
+  }
 
 }
