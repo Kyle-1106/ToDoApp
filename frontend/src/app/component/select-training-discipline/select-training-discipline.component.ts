@@ -19,7 +19,23 @@ export class SelectTrainingDisciplineComponent {
   }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
   ngOnChanges(){
     console.log(this.bodyPart)
+    
   }
+
+  getTrainingDisciplines(bodyPart:string){
+    this.selectTrainingDisciplineService.getTrainingDisciplines(bodyPart).subscribe({
+      next:(response)=>{
+        console.log(response)
+
+      },
+      error:(error)=>{
+        console.log(error)
+      }
+    })
+
+  }
+
+  
 
   
 }
