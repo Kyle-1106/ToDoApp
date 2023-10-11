@@ -19,16 +19,20 @@ export class SelectTrainingDisciplineComponent {
   
   ngOnInit(){
     const bodyPart=localStorage.getItem("bodyPart");
-    if(bodyPart){
-      this.getTrainingDisciplines(bodyPart);
+    if(!bodyPart){
+     
     }
+    this.getTrainingDisciplines(bodyPart);
+    
 
   }
 
-  getTrainingDisciplines(bodyPart:string){
+  getTrainingDisciplines(bodyPart:any){
     this.selectTrainingDisciplineService.getTrainingDisciplines(bodyPart).subscribe({
       next:(response)=>{
         console.log(response)
+       this.trainingDisciplines=response
+      
       },
       error:(error)=>{
         console.log(error)

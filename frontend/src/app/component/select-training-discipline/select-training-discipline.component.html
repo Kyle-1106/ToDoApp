@@ -1,1 +1,16 @@
-
+<div class="trainingDisciplines-container">
+    <div class="fw-bold">
+      <p>種目を選んでください</p>
+    </div>
+    <div *ngIf="trainingDisciplines">
+      <div class="my-2">
+        <button
+          *ngFor="let discipline of trainingDisciplines"
+          class="btn btn-primary my-2"
+        >
+          {{ discipline.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
