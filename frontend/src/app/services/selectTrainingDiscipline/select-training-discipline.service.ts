@@ -12,6 +12,9 @@ export class SelectTrainingDisciplineService {
 
   getTrainingDisciplines(bodyPart:string){
     const params={name:bodyPart};
+    console.log(params)
+   
+    console.log(this.http.get<TrainingDiscipline[]>(this.url,{params}));
     return this.http.get<TrainingDiscipline[]>(this.url,{params});
   }
 

@@ -7,12 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./select-bodypart.component.scss']
 })
 export class SelectBodypartComponent {
-  public bodyPart:string;
+  bodyPart:string;
   constructor(private router:Router){}
   
   navigateToTrainingDiscipline(bodyPart:string){
     this.bodyPart=bodyPart;
+    localStorage.setItem("bodyPart",bodyPart);
     this.router.navigate(["home/workout/selectTrainingDiscipline"]);
   }
+   
 
 }

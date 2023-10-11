@@ -11,7 +11,6 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"signup",component:SignupComponent},
   {path:"home",component:HomeComponent,canActivate:[authGuard]},
-  {path:"home/workout/selectBodyPart/",component:SelectBodypartComponent,canActivate:[authGuard]},
   {path:"home/workout/selectBodyPart",component:SelectBodypartComponent,canActivate:[authGuard]},
   {path:"home/workout/selectTrainingDiscipline",component:SelectTrainingDisciplineComponent,canActivate:[authGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full' }, 

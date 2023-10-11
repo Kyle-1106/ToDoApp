@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var workoutService = require('../services/workoutService');
+//部位名取得
 const getBodyParts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //部位名を取得
@@ -24,6 +25,13 @@ const getBodyParts = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.status(500).json({ error: '部位名の取得に失敗しました。' });
     }
 });
+//種目名取得
+// const getTrainingDisciplines=async (req;any,res:any)=>{
+try {
+}
+catch (error) {
+}
+// }
 module.exports = {
     getBodyParts,
 };
