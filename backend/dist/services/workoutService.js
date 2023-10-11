@@ -14,6 +14,7 @@ var { Bodypart } = require("../models/bodyPart");
 const prisma = new PrismaClient({
     log: ['query', 'info', 'warn', 'error'],
 });
+//部位取得処理
 const getAllBodyParts = (res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allBodyParts = yield prisma.bodypart.findMany();
@@ -24,12 +25,18 @@ const getAllBodyParts = (res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log("エラー", error);
     }
 });
+//部位名取得処理
 const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("bfsfsfs");
-        const trainingDisciplines = yield prisma.training_discipline.findMany({
+        const selectedBodyPart = yield prisma.bodypart.findUnique({
             where: {
                 name: bodyPart
+            }
+        });
+        const bodyPartId = selectedBodyPart.id;
+        const trainingDisciplines = yield prisma.training_discipline.findMany({
+            where: {
+                bodypartId: bodyPartId
             }
         });
         if (!trainingDisciplines) {
@@ -40,8 +47,24 @@ const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, f
     catch (error) {
     }
 });
+const registTrainingDiscipline = (trainingDisciplineName, trainingDisciplineBodyPartId) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log(trainingDisciplineName);
+        console.log(trainingDisciplineBodyPartId);
+        yield prisma.training_discipline.create({
+            data: {
+                name: trainingDisciplineName,
+                bodypartId: trainingDisciplineBodyPartId
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
 module.exports = {
     getAllBodyParts,
     getTrainingDisciplines,
+    registTrainingDiscipline,
 };
 //# sourceMappingURL=workoutService.js.map

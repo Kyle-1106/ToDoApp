@@ -25,6 +25,7 @@ const getTrainingDisciplines=async (req:any,res:any)=>{
     try {
         const bodyPart:string=req.query.name;
         const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPart);
+        console.log("trainingDisciplines")
         console.log(trainingDisciplines)
         res.status(200).json(trainingDisciplines)
     } catch (error) {
@@ -34,6 +35,22 @@ const getTrainingDisciplines=async (req:any,res:any)=>{
     }
 }
 
+//種目登録
+const registTrainingDiscipline=async(req:any,res:any)=>{
+    try {
+        const name=req.body.id;
+        const id=req.body.name;
+        const trainingDisciplines=await workoutService.registTrainingDiscipline(name,id);
+        res.status(200).json(trainingDisciplines)
+    } catch (error) {
+        console.log(error)
+        throw Error ("種目が取得取得できませんでした")
+    }
+    
+
+
+}
+
 
 
 
@@ -41,4 +58,5 @@ const getTrainingDisciplines=async (req:any,res:any)=>{
 module.exports={
     getBodyParts,
     getTrainingDisciplines,
+    registTrainingDiscipline,
 }
