@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var { PrismaClient } = require('@prisma/client');
 var { Bodypart } = require("../models/bodyPart");
 const prisma = new PrismaClient({
@@ -23,7 +24,24 @@ const getAllBodyParts = (res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log("エラー", error);
     }
 });
+const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("bfsfsfs");
+        const trainingDisciplines = yield prisma.training_discipline.findMany({
+            where: {
+                name: bodyPart
+            }
+        });
+        if (!trainingDisciplines) {
+            return null;
+        }
+        return trainingDisciplines;
+    }
+    catch (error) {
+    }
+});
 module.exports = {
     getAllBodyParts,
+    getTrainingDisciplines,
 };
 //# sourceMappingURL=workoutService.js.map

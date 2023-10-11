@@ -1,4 +1,5 @@
 import { BodyPart } from "../models/bodyPart"
+import { TrainingDiscipline } from "../models/trainingDiscipline";
 
 var workoutService = require('../services/workoutService');
 
@@ -7,7 +8,7 @@ var workoutService = require('../services/workoutService');
 const getBodyParts=async (req:any,res:any) =>{
     try {
         //部位名を取得
-        const allBodyParts:typeof Bodypart=await workoutService.getAllBodyParts();
+        const allBodyParts:typeof BodyPart=await workoutService.getAllBodyParts();
         if(!allBodyParts){
             throw new Error("部位名を取得できませんでした");
         }
@@ -20,14 +21,18 @@ const getBodyParts=async (req:any,res:any) =>{
 }
 
 //種目名取得
-// const getTrainingDisciplines=async (req;any,res:any)=>{
+const getTrainingDisciplines=async (req:any,res:any)=>{
     try {
-        
+        const bodyPart:string=req.query.name;
+        const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPart);
+        console.log(trainingDisciplines)
+        res.status(200).json(trainingDisciplines)
     } catch (error) {
+        console.log(error)
+        throw new Error("種目の取得ができません");
         
     }
-    
-// }
+}
 
 
 
@@ -35,4 +40,5 @@ const getBodyParts=async (req:any,res:any) =>{
 
 module.exports={
     getBodyParts,
+    getTrainingDisciplines,
 }

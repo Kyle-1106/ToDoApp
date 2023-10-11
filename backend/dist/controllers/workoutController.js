@@ -26,13 +26,20 @@ const getBodyParts = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 //種目名取得
-// const getTrainingDisciplines=async (req;any,res:any)=>{
-try {
-}
-catch (error) {
-}
-// }
+const getTrainingDisciplines = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const bodyPart = req.query.name;
+        const trainingDisciplines = yield workoutService.getTrainingDisciplines(bodyPart);
+        console.log(trainingDisciplines);
+        res.status(200).json(trainingDisciplines);
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error("種目の取得ができません");
+    }
+});
 module.exports = {
     getBodyParts,
+    getTrainingDisciplines,
 };
 //# sourceMappingURL=workoutController.js.map
