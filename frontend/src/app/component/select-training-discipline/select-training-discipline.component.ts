@@ -26,8 +26,6 @@ export class SelectTrainingDisciplineComponent {
   }
 
   getTrainingDisciplines(bodyPart:string){
-    console.log("getTrainingDisciplines呼ばれてる")
-    console.log(bodyPart);
     this.selectTrainingDisciplineService.getTrainingDisciplines(bodyPart).subscribe({
       next:(response)=>{
         console.log(response)
