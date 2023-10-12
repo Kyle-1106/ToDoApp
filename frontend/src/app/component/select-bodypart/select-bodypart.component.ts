@@ -8,27 +8,14 @@ import { SelectBodyPartService } from 'src/app/services/selectBodyPart/select-bo
   styleUrls: ['./select-bodypart.component.scss']
 })
 export class SelectBodypartComponent {
-  bodyPart:string;
+  bodyPartId:number;
   constructor(private router:Router,private selectBodyPartService:SelectBodyPartService){}
   
-  navigateToTrainingDiscipline(bodyPart:any){
-    this.bodyPart=bodyPart;
-    this.selectBodyPartService.getBodyPartId(bodyPart).subscribe({
-      next:(respnse)=>{
-        console.log(respnse)
-        const bodyPartId=respnse.id;
-        const bodyPartIdString:string=String(bodyPartId);
-        localStorage.setItem("bodyPartId",bodyPartIdString)
-        this.router.navigate(["home/workout/selectTrainingDiscipline"]); 
-      },
-      error:(error)=>{
-        console.log(error)
-      },
-    });
-      
-    
-  
-    
+  navigateToTrainingDiscipline(bodyPartId:number){
+    this.bodyPartId=bodyPartId;
+    const bodyPartIdString:string=String(bodyPartId);
+    localStorage.setItem("bodyPartId",bodyPartIdString)
+    this.router.navigate(["home/workout/selectTrainingDiscipline"]);   
   }
    
 

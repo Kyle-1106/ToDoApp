@@ -25,14 +25,8 @@ const getAllBodyParts = (res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 //部位名取得処理
-const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, function* () {
+const getTrainingDisciplines = (bodyPartId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const selectedBodyPart = yield prisma.bodypart.findUnique({
-            where: {
-                name: bodyPart
-            }
-        });
-        const bodyPartId = selectedBodyPart.id;
         const trainingDisciplines = yield prisma.training_discipline.findMany({
             where: {
                 bodypartId: bodyPartId
@@ -41,6 +35,8 @@ const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, f
         if (!trainingDisciplines) {
             return null;
         }
+        console.log("trainingDisciplines");
+        console.log(trainingDisciplines);
         return trainingDisciplines;
     }
     catch (error) {
@@ -49,6 +45,8 @@ const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, f
 //部位ID取得処理
 const getBodyPart = (bodyPartName, req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log("bodyPartName");
+        console.log(bodyPartName);
         const bodyPart = yield prisma.bodypart.findUnique({
             where: {
                 name: bodyPartName

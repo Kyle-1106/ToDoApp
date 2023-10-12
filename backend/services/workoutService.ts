@@ -21,14 +21,8 @@ const getAllBodyParts=async (res:typeof Bodypart[])=> {
 }
 
 //部位名取得処理
-const getTrainingDisciplines=async(bodyPart:typeof Bodypart)=>{
+const getTrainingDisciplines=async(bodyPartId:number)=>{
     try {
-       const selectedBodyPart:typeof Bodypart=await prisma.bodypart.findUnique({
-        where:{
-            name:bodyPart
-        }
-       });
-       const bodyPartId=selectedBodyPart.id;
        const trainingDisciplines:TrainingDiscipline[]=await prisma.training_discipline.findMany({
         where:{
             bodypartId:bodyPartId
@@ -37,6 +31,8 @@ const getTrainingDisciplines=async(bodyPart:typeof Bodypart)=>{
        if(!trainingDisciplines){
         return null;
        }
+       console.log("trainingDisciplines")
+       console.log(trainingDisciplines)
        return trainingDisciplines;
     } catch (error) {
         
@@ -47,6 +43,8 @@ const getTrainingDisciplines=async(bodyPart:typeof Bodypart)=>{
 //部位ID取得処理
 const getBodyPart=async(bodyPartName:any,req:any)=>{
     try {
+        console.log("bodyPartName")
+        console.log(bodyPartName)
         const bodyPart=await prisma.bodypart.findUnique({
             where:{
                 name:bodyPartName

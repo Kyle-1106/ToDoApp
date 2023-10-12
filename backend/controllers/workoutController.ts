@@ -24,8 +24,13 @@ const getBodyParts=async (req:any,res:any) =>{
 //部位ID取得
 const getBodyPartId=async(req:any,res:any)=>{
     try {
+        console.log("ewq")
+        console.log(req)
         const bodyPartName=req.query.name;
+        console.log("bodyPartName")
+        console.log(bodyPartName)
         const bodyPart=await workoutService.getBodyPart(bodyPartName);
+        console.log(bodyPart)
         res.status(200).json(bodyPart);
     } catch (error) {
         console.log(error)
@@ -37,8 +42,10 @@ const getBodyPartId=async(req:any,res:any)=>{
 //種目名取得
 const getTrainingDisciplines=async (req:any,res:any)=>{
     try {
-        const bodyPart:string=req.query.name;
-        const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPart);
+        const bodyPartId=Number(req.query.id);
+        console.log("bodyPartId")
+        console.log(bodyPartId)
+        const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPartId);
         console.log("trainingDisciplines")
         console.log(trainingDisciplines)
         res.status(200).json(trainingDisciplines)

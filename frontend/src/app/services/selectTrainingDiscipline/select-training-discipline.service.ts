@@ -10,8 +10,8 @@ export class SelectTrainingDisciplineService {
   readonly httpOpions=this.httpoption.httpOptions;
   readonly url="http://localhost:3001/workout/getTrainingDisciplines";
 
-  getTrainingDisciplines(bodyPart:string){
-    const params={name:bodyPart};
+  getTrainingDisciplines(bodyPartId:number){
+    const params={id:bodyPartId};
     return this.http.get<TrainingDiscipline[]>(this.url,{params});
   }
 

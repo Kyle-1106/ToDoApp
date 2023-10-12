@@ -12,8 +12,8 @@ export class SelectBodyPartService {
   readonly httpOptions=this.httpoption.httpOptions
   readonly url="http://localhost:3001/workout/getBodyPartId"
 
-  getBodyPartId(bodyPart:string){
-    const params={name:bodyPart};
+  getBodyPartId(bodyPartId:number){
+    const params={id:bodyPartId};
     return this.http.get<BodyPart>(this.url,{params})
   }
 }

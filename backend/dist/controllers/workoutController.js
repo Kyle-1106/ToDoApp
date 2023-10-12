@@ -28,9 +28,12 @@ const getBodyParts = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 //部位ID取得
 const getBodyPartId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log("ewq");
+        console.log(req);
         const bodyPartName = req.query.name;
+        console.log("bodyPartName");
+        console.log(bodyPartName);
         const bodyPart = yield workoutService.getBodyPart(bodyPartName);
-        console.log("bodyPart");
         console.log(bodyPart);
         res.status(200).json(bodyPart);
     }
@@ -42,8 +45,10 @@ const getBodyPartId = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 //種目名取得
 const getTrainingDisciplines = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const bodyPart = req.query.name;
-        const trainingDisciplines = yield workoutService.getTrainingDisciplines(bodyPart);
+        const bodyPartId = Number(req.query.id);
+        console.log("bodyPartId");
+        console.log(bodyPartId);
+        const trainingDisciplines = yield workoutService.getTrainingDisciplines(bodyPartId);
         console.log("trainingDisciplines");
         console.log(trainingDisciplines);
         res.status(200).json(trainingDisciplines);
