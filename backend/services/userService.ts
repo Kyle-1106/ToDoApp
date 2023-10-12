@@ -37,9 +37,9 @@ const createUser = async (userData: any) => {
 
 
 //ユーザ取得
-const selectUser=async (loginData:any,user:User)=>{
+const selectUser=async (userData:User,user:User)=>{
   try {
-    const email=loginData.email;
+    const email=userData.email;
     const user:User= await prisma.user.findUnique({
       where: {
         email:email

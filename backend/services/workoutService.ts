@@ -79,14 +79,14 @@ const recordWorkout=async(workout:Workout,res:any)=>{
                 id:true
             },
         })
-        const bodypartId=await prisma.bodypart.findUnique({
-            where:{
-                bodypart:workout.bodyPart
-            },
-            select:{
-                id:true
-            },
-        })
+        // const bodypartId=await prisma.bodypart.findUnique({
+        //     where:{
+        //         bodypart:workout.bodyPart
+        //     },
+        //     select:{
+        //         id:true
+        //     },
+        // })
         
         const record=await prisma.workoutlog.create({
             data:{

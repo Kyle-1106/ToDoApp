@@ -32,6 +32,7 @@ const loginCheck = (loginData, jwtBody) => __awaiter(void 0, void 0, void 0, fun
         };
         const token = jwt.sign(payload, config.jwt.secret, config.jwt.options);
         const jwtBody = {
+            userId: user.id,
             email: user.email,
             token: token,
         };

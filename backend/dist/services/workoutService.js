@@ -62,9 +62,38 @@ const registTrainingDiscipline = (trainingDisciplineName, trainingDisciplineBody
         console.log(error);
     }
 });
+const recordWorkout = (workout, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = yield prisma.user.findUnique({
+            where: {
+                email: workout.email,
+            },
+            select: {
+                id: true
+            },
+        });
+        // const bodypartId=await prisma.bodypart.findUnique({
+        //     where:{
+        //         bodypart:workout.bodyPart
+        //     },
+        //     select:{
+        //         id:true
+        //     },
+        // })
+        const record = yield prisma.workoutlog.create({
+            data: {
+                userId: userId,
+                bodypartId: workout.bodyPartId
+            }
+        });
+    }
+    catch (error) {
+    }
+});
 module.exports = {
     getAllBodyParts,
     getTrainingDisciplines,
     registTrainingDiscipline,
+    recordWorkout,
 };
 //# sourceMappingURL=workoutService.js.map

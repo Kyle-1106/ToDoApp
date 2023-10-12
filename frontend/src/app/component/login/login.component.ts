@@ -30,6 +30,8 @@ export class LoginComponent {
       const formData = this.loginForm.value;
       this.loginService.login(formData).subscribe({
         next: (response) => {
+          console.log("response")
+          console.log(response)
           //JWTの保存
           this.loginService.saveToken(response);
           //ホーム画面への遷移

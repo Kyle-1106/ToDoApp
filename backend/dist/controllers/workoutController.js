@@ -52,9 +52,13 @@ const registTrainingDiscipline = (req, res) => __awaiter(void 0, void 0, void 0,
         throw Error("種目が取得取得できませんでした");
     }
 });
+const recordWorkout = (workout, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const workoutlog = workoutService.recordWorkout(workout);
+});
 module.exports = {
     getBodyParts,
     getTrainingDisciplines,
     registTrainingDiscipline,
+    recordWorkout,
 };
 //# sourceMappingURL=workoutController.js.map

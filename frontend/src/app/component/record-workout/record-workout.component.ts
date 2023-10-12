@@ -46,8 +46,8 @@ export class RecordWorkoutComponent {
       memo:this.memo
     }
     //登録処理
-    workoutInfo
-    this.recordWorkoutService(workoutInfo);
+    // workoutInfo
+    // this.recordWorkoutService(workoutInfo);
 
 
     localStorage.removeItem("bodyPart")

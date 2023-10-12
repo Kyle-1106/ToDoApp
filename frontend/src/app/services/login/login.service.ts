@@ -33,7 +33,8 @@ login(loginForm: Login): Observable<Auth> {
 
   //トークンの保存
   saveToken(response:Auth):void{
-    const idString=String(response.id);
+    console.log(response)
+    const idString=String(response.userId);
     localStorage.setItem("id",idString);
     localStorage.setItem("jwt",response.token);
     localStorage.setItem("email",response.email);

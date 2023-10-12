@@ -16,8 +16,9 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userData = req.body;
         const createdUser = yield userService.createUser(userData);
+        const selectedUser = yield userService.selectUser(userData);
         //JWT設定
-        const signupData = { "email": userData.email, "password": userData.password };
+        const signupData = { "id": selectedUser.id, "email": userData.email, "password": userData.password };
         const loginToken = yield loginService.loginCheck(signupData);
         if (!loginToken) {
             throw new Error("トークンの作成に失敗しました");

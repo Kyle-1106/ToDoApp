@@ -19,7 +19,3 @@ export class RecordWorkoutService {
     return this.http.post<Workout>(this.url,workoutInfo,this.httpoptions)
   }
 }
-
-module.exports={
-  RecordWorkoutService
-}

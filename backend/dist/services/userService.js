@@ -38,9 +38,9 @@ const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 //ユーザ取得
-const selectUser = (loginData, user) => __awaiter(void 0, void 0, void 0, function* () {
+const selectUser = (userData, user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const email = loginData.email;
+        const email = userData.email;
         const user = yield prisma.user.findUnique({
             where: {
                 email: email
