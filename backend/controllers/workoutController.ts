@@ -21,6 +21,19 @@ const getBodyParts=async (req:any,res:any) =>{
     }   
 }
 
+//部位ID取得
+const getBodyPartId=async(req:any,res:any)=>{
+    try {
+        const bodyPartName=req.query.name;
+        const bodyPart=await workoutService.getBodyPart(bodyPartName);
+        res.status(200).json(bodyPart);
+    } catch (error) {
+        console.log(error)
+        throw new Error("部位IDの取得ができません");
+    }
+  
+}
+
 //種目名取得
 const getTrainingDisciplines=async (req:any,res:any)=>{
     try {
@@ -65,4 +78,5 @@ module.exports={
     getTrainingDisciplines,
     registTrainingDiscipline,
     recordWorkout,
+    getBodyPartId,
 }

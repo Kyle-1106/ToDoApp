@@ -14,7 +14,6 @@ const prisma = new PrismaClient({
 const getAllBodyParts=async (res:typeof Bodypart[])=> {
     try {
         const allBodyParts=await prisma.bodypart.findMany();
-        console.log(allBodyParts);
         return allBodyParts;
     } catch (error) {
         console.log("エラー",error)   
@@ -39,14 +38,26 @@ const getTrainingDisciplines=async(bodyPart:typeof Bodypart)=>{
         return null;
        }
        return trainingDisciplines;
-       
-       
-
-        
     } catch (error) {
         
     }
+}
 
+
+//部位ID取得処理
+const getBodyPart=async(bodyPartName:any,req:any)=>{
+    try {
+        const bodyPart=await prisma.bodypart.findUnique({
+            where:{
+                name:bodyPartName
+            },
+        })
+        return bodyPart;
+        
+    } catch (error) {
+        throw Error("部位IDを取得できませんでした")
+    }
+    
 }
 
 const registTrainingDiscipline=async(trainingDisciplineName:string,trainingDisciplineBodyPartId:number)=>{
@@ -108,5 +119,5 @@ module.exports={
     getTrainingDisciplines,
     registTrainingDiscipline,
     recordWorkout,
-
+    getBodyPart,
 }

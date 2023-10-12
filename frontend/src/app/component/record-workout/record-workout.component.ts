@@ -35,6 +35,8 @@ export class RecordWorkoutComponent {
   }
 
   recordWorkout(){
+    const userIdString=localStorage.getItem("id");
+    const userId:number=Number(userIdString);
     const bodyPart=localStorage.getItem("bodyPart")
     const discipline=localStorage.getItem("discipline")
     const workoutInfo={

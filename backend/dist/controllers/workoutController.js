@@ -25,6 +25,20 @@ const getBodyParts = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.status(500).json({ error: '部位名の取得に失敗しました。' });
     }
 });
+//部位ID取得
+const getBodyPartId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const bodyPartName = req.query.name;
+        const bodyPart = yield workoutService.getBodyPart(bodyPartName);
+        console.log("bodyPart");
+        console.log(bodyPart);
+        res.status(200).json(bodyPart);
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error("部位IDの取得ができません");
+    }
+});
 //種目名取得
 const getTrainingDisciplines = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -60,5 +74,6 @@ module.exports = {
     getTrainingDisciplines,
     registTrainingDiscipline,
     recordWorkout,
+    getBodyPartId,
 };
 //# sourceMappingURL=workoutController.js.map

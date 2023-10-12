@@ -18,7 +18,6 @@ const prisma = new PrismaClient({
 const getAllBodyParts = (res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allBodyParts = yield prisma.bodypart.findMany();
-        console.log(allBodyParts);
         return allBodyParts;
     }
     catch (error) {
@@ -45,6 +44,20 @@ const getTrainingDisciplines = (bodyPart) => __awaiter(void 0, void 0, void 0, f
         return trainingDisciplines;
     }
     catch (error) {
+    }
+});
+//部位ID取得処理
+const getBodyPart = (bodyPartName, req) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const bodyPart = yield prisma.bodypart.findUnique({
+            where: {
+                name: bodyPartName
+            },
+        });
+        return bodyPart;
+    }
+    catch (error) {
+        throw Error("部位IDを取得できませんでした");
     }
 });
 const registTrainingDiscipline = (trainingDisciplineName, trainingDisciplineBodyPartId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -95,5 +108,6 @@ module.exports = {
     getTrainingDisciplines,
     registTrainingDiscipline,
     recordWorkout,
+    getBodyPart,
 };
 //# sourceMappingURL=workoutService.js.map
