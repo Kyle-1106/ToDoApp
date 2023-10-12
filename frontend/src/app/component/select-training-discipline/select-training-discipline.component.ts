@@ -1,4 +1,5 @@
 import { Component,Input,OnInit, OnChanges, SimpleChanges  } from '@angular/core';
+import { Router } from '@angular/router';
 import { TrainingDiscipline } from 'src/app/models/trainingDiscipline.model';
 import { SelectTrainingDisciplineService } from 'src/app/services/selectTrainingDiscipline/select-training-discipline.service';
 
@@ -14,7 +15,7 @@ export class SelectTrainingDisciplineComponent {
   trainingDisciplines:TrainingDiscipline[];
   errorMessage:string;
  
-  constructor(private selectTrainingDisciplineService:SelectTrainingDisciplineService){
+  constructor(private selectTrainingDisciplineService:SelectTrainingDisciplineService,private router:Router){
   }                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
   
   ngOnInit(){
@@ -38,7 +39,12 @@ export class SelectTrainingDisciplineComponent {
         console.log(error)
       }
     })
+  }
 
+  saveTrainingDiscipline(disciplineName:string){
+    localStorage.setItem("discipline",disciplineName);
+    this.router.navigate(["/home/workout/recordWorkout"]);
+    
   }
 
   

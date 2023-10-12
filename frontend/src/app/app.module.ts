@@ -13,6 +13,7 @@ import { HomeComponent } from './component/home/home.component';
 import { WorkoutComponent } from './component/workout/workout.component';
 import { SelectBodypartComponent } from './component/select-bodypart/select-bodypart.component';
 import { SelectTrainingDisciplineComponent } from './component/select-training-discipline/select-training-discipline.component';
+import { RecordWorkoutComponent } from './component/record-workout/record-workout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SelectTrainingDisciplineComponent } from './component/select-training-d
     WorkoutComponent,
     SelectBodypartComponent,
     SelectTrainingDisciplineComponent,
+    RecordWorkoutComponent,
     
   ],
   imports: [
