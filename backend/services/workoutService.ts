@@ -1,5 +1,6 @@
 
 import { TrainingDiscipline } from "../models/trainingDiscipline";
+import { Workout } from "../models/workout";
 
 var { PrismaClient } = require('@prisma/client');
 var { Bodypart } = require( "../models/bodyPart");
@@ -68,10 +69,44 @@ const registTrainingDiscipline=async(trainingDisciplineName:string,trainingDisci
 }
 
 
+const recordWorkout=async(workout:Workout,res:any)=>{
+    try {
+        const userId=await prisma.user.findUnique({
+            where:{
+                email:workout.email,
+            },
+            select:{
+                id:true
+            },
+        })
+        const bodypartId=await prisma.bodypart.findUnique({
+            where:{
+                bodypart:workout.bodyPart
+            },
+            select:{
+                id:true
+            },
+        })
+        
+        const record=await prisma.workoutlog.create({
+            data:{
+                userId:userId,
+                bodypartId:workout.bodyPartId
+            }
+        })
+    } catch (error) {
+        
+    }
+   
+
+}
+
+
 
 module.exports={
     getAllBodyParts,
     getTrainingDisciplines,
     registTrainingDiscipline,
+    recordWorkout,
 
 }

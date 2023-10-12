@@ -1,5 +1,6 @@
 import { BodyPart } from "../models/bodyPart"
 import { TrainingDiscipline } from "../models/trainingDiscipline";
+import { Workout } from "../models/workout";
 
 var workoutService = require('../services/workoutService');
 
@@ -46,10 +47,14 @@ const registTrainingDiscipline=async(req:any,res:any)=>{
         console.log(error)
         throw Error ("種目が取得取得できませんでした")
     }
-    
+}
 
+const recordWorkout=async(workout:Workout,res:any)=>{
+    const workoutlog=workoutService.recordWorkout(workout);
 
 }
+
+
 
 
 
@@ -59,4 +64,5 @@ module.exports={
     getBodyParts,
     getTrainingDisciplines,
     registTrainingDiscipline,
+    recordWorkout,
 }
