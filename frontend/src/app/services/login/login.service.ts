@@ -6,6 +6,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Token } from '@angular/compiler';
 import { Auth } from 'src/app/models/auth.model';
 import { HttpOptions } from 'src/app/config/httpOption';
+import { getLocaleExtraDayPeriodRules } from '@angular/common';
 
 
 
@@ -32,6 +33,8 @@ login(loginForm: Login): Observable<Auth> {
 
   //トークンの保存
   saveToken(response:Auth):void{
+    const idString=String(response.id);
+    localStorage.setItem("id",idString);
     localStorage.setItem("jwt",response.token);
     localStorage.setItem("email",response.email);
   }

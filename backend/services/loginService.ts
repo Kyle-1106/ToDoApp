@@ -28,6 +28,7 @@ const loginCheck=async (loginData:Login,jwtBody:JWT) =>{
           };
         const token=jwt.sign(payload,config.jwt.secret,config.jwt.options);
         const jwtBody:JWT={
+            userId:user.id,
             email:user.email,
             token:token,
         }
