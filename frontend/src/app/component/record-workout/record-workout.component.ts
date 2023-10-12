@@ -38,6 +38,7 @@ export class RecordWorkoutComponent {
     const bodyPart=localStorage.getItem("bodyPart")
     const discipline=localStorage.getItem("discipline")
     const workoutInfo={
+      email:localStorage.getItem("email"),
       bodyPart:bodyPart,
       discipline:discipline,
       weight:this.weight,
@@ -45,6 +46,7 @@ export class RecordWorkoutComponent {
       memo:this.memo
     }
     //登録処理
+    workoutInfo
     this.recordWorkoutService(workoutInfo);
 
 
