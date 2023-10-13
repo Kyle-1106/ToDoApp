@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RecordWorkoutService } from 'src/app/services/recordWorkout/record-workout.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class RecordWorkoutComponent {
   memo:FormControl;
   errorMessage:string;
 
-  constructor(private formBuilder:FormBuilder,private recordWorkoutService:RecordWorkoutService){
+  constructor(private formBuilder:FormBuilder,private recordWorkoutService:RecordWorkoutService,private router:Router){
     //バリデーション追加
     this.weight=new FormControl("",[Validators.required,Validators.min(1)]);
     this.reps=new FormControl("",[Validators.required,Validators.min(1)]);
@@ -64,10 +65,11 @@ export class RecordWorkoutComponent {
         this.errorMessage=error
       }
     });
-
-
-    // localStorage.removeItem("bodyPart")
-    // localStorage.removeItem("discipline")
+    localStorage.removeItem("bodyPartId");
+    localStorage.removeItem("disciplineId");
+    localStorage.removeItem("disciplineName");
+    this.router.navigate(["/home/workout/selectBodyPart"]);
+     
     
   }
 
