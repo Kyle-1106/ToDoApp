@@ -69,9 +69,22 @@ const registTrainingDiscipline=async(req:any,res:any)=>{
     }
 }
 
-const recordWorkout=async(workout:Workout,res:any)=>{
-    const workoutlog=workoutService.recordWorkout(workout);
 
+//ワークアウト登録
+const recordWorkout=async(req:any,res:any)=>{
+    try {
+        console.log("workout")
+        const workout=req.body;
+        console.log(workout)
+        const workoutlog=await workoutService.recordWorkout(workout);
+        res.status(200).json(workoutlog);
+        
+    } catch (error) {
+        console.log(error);
+        throw new Error("ワークアウトの登録ができません")
+        
+    }
+   
 }
 
 

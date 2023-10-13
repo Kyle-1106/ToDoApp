@@ -15,4 +15,5 @@ export class SelectTrainingDisciplineService {
     return this.http.get<TrainingDiscipline[]>(this.url,{params});
   }
 
+
 }

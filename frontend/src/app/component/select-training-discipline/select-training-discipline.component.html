@@ -7,9 +7,9 @@
         <button
           *ngFor="let discipline of trainingDisciplines"
           class="btn btn-primary my-2"
-          (click)="saveTrainingDiscipline(discipline.name)"
+          (click)="saveTrainingDiscipline(discipline)"
         >
-          {{ discipline.name }}
+          {{ discipline.name}}
         </button>
       </div>
     </div>

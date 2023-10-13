@@ -40,8 +40,12 @@ export class SelectTrainingDisciplineComponent {
     })
   }
 
-  saveTrainingDiscipline(disciplineName:string){
-    localStorage.setItem("discipline",disciplineName);
+  saveTrainingDiscipline(discipline:TrainingDiscipline){
+    const disciplineId=discipline.id;
+    const disciplineName=discipline.name
+    const disciplineIdtoString:string=String(disciplineId);
+    localStorage.setItem("disciplineId",disciplineIdtoString);
+    localStorage.setItem("disciplineName",disciplineName);
     this.router.navigate(["/home/workout/recordWorkout"]);
     
   }

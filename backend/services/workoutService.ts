@@ -77,32 +77,22 @@ const registTrainingDiscipline=async(trainingDisciplineName:string,trainingDisci
     
 }
 
-
-const recordWorkout=async(workout:Workout,res:any)=>{
+//ワークアウト登録
+const recordWorkout=async(workout:any,res:any)=>{
     try {
-        const userId=await prisma.user.findUnique({
-            where:{
-                email:workout.email,
-            },
-            select:{
-                id:true
-            },
-        })
-        // const bodypartId=await prisma.bodypart.findUnique({
-        //     where:{
-        //         bodypart:workout.bodyPart
-        //     },
-        //     select:{
-        //         id:true
-        //     },
-        // })
-        
-        const record=await prisma.workoutlog.create({
+        const record:Workout=await prisma.workoutLog.create({
             data:{
-                userId:userId,
-                bodypartId:workout.bodyPartId
+                userId:workout.userId,
+                bodypartId:workout.bodyPartId,
+                training_disciplineId:workout.disciplineId,
+                weight:workout.weight,
+                rep:workout.reps,
+                RM:workout.weight*workout.reps/40+workout.weight,
+                memo:workout.memo
             }
         })
+        await prisma.$disconnect();
+        return record;
     } catch (error) {
         
     }

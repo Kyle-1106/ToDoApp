@@ -71,8 +71,19 @@ const registTrainingDiscipline = (req, res) => __awaiter(void 0, void 0, void 0,
         throw Error("種目が取得取得できませんでした");
     }
 });
-const recordWorkout = (workout, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const workoutlog = workoutService.recordWorkout(workout);
+//ワークアウト登録
+const recordWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("workout");
+        const workout = req.body;
+        console.log(workout);
+        const workoutlog = yield workoutService.recordWorkout(workout);
+        res.status(200).json(workoutlog);
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error("ワークアウトの登録ができません");
+    }
 });
 module.exports = {
     getBodyParts,

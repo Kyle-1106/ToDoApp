@@ -13,47 +13,61 @@ export class RecordWorkoutComponent {
   workoutForm:FormGroup;
   weight:FormControl;
   reps:FormControl;
-  memo:string;
+  memo:FormControl;
   errorMessage:string;
 
   constructor(private formBuilder:FormBuilder,private recordWorkoutService:RecordWorkoutService){
     //バリデーション追加
     this.weight=new FormControl("",[Validators.required,Validators.min(1)]);
     this.reps=new FormControl("",[Validators.required,Validators.min(1)]);
+    this.memo=new FormControl("");
 
 
     this.workoutForm=this.formBuilder.group({
       weight:this.weight,
       reps:this.reps,
+      memo:this.memo
     })
 
     this.errorMessage=""
   }
   
   ngOnInit(){
-    this.trainingDiscipline=localStorage.getItem("discipline");
+    this.trainingDiscipline=localStorage.getItem("disciplineName");
   }
 
   recordWorkout(){
-    const userIdString=localStorage.getItem("id");
+    const formData=this.workoutForm.value;
+    const userIdString:string|null=localStorage.getItem("id");
     const userId:number=Number(userIdString);
-    const bodyPart=localStorage.getItem("bodyPart")
-    const discipline=localStorage.getItem("discipline")
+    const bodyPartIdString=localStorage.getItem("bodyPartId")
+    const bodyPartId:number=Number(bodyPartIdString);
+    const disciplineIdString=localStorage.getItem("disciplineId");
+    const disciplineId=Number(disciplineIdString);
+
     const workoutInfo={
-      email:localStorage.getItem("email"),
-      bodyPart:bodyPart,
-      discipline:discipline,
-      weight:this.weight,
-      reps:this.reps,
-      memo:this.memo
+      userId:userId,
+      bodyPartId:bodyPartId,
+      disciplineId:disciplineId,
+      weight:formData.weight,
+      reps:formData.reps,
+      memo:formData.memo
     }
+    console.log(workoutInfo)
     //登録処理
-    // workoutInfo
-    // this.recordWorkoutService(workoutInfo);
+    this.recordWorkoutService.recordWorkout(workoutInfo).subscribe({
+      next:(response)=>{
+        console.log(response);
+      },
+      error:(error)=>{
+        console.log(error);
+        this.errorMessage=error
+      }
+    });
 
 
-    localStorage.removeItem("bodyPart")
-    localStorage.removeItem("discipline")
+    // localStorage.removeItem("bodyPart")
+    // localStorage.removeItem("discipline")
     
   }
 

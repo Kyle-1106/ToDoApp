@@ -73,30 +73,22 @@ const registTrainingDiscipline = (trainingDisciplineName, trainingDisciplineBody
         console.log(error);
     }
 });
+//ワークアウト登録
 const recordWorkout = (workout, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userId = yield prisma.user.findUnique({
-            where: {
-                email: workout.email,
-            },
-            select: {
-                id: true
-            },
-        });
-        // const bodypartId=await prisma.bodypart.findUnique({
-        //     where:{
-        //         bodypart:workout.bodyPart
-        //     },
-        //     select:{
-        //         id:true
-        //     },
-        // })
-        const record = yield prisma.workoutlog.create({
+        const record = yield prisma.workoutLog.create({
             data: {
-                userId: userId,
-                bodypartId: workout.bodyPartId
+                userId: workout.userId,
+                bodypartId: workout.bodyPartId,
+                training_disciplineId: workout.disciplineId,
+                weight: workout.weight,
+                rep: workout.reps,
+                RM: workout.weight * workout.reps / 40 + workout.weight,
+                memo: workout.memo
             }
         });
+        yield prisma.$disconnect();
+        return record;
     }
     catch (error) {
     }

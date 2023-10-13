@@ -1,7 +1,6 @@
 export class Workout{
     id:number;
     userId:number;
-    email:string
     bodyPartId:number;
     training_disciplineId:number
     created_at:Date;
