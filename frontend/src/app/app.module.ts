@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
-import { WorkoutComponent } from './component/workout/workout.component';
 import { SelectBodypartComponent } from './component/select-bodypart/select-bodypart.component';
 import { SelectTrainingDisciplineComponent } from './component/select-training-discipline/select-training-discipline.component';
 import { RecordWorkoutComponent } from './component/record-workout/record-workout.component';
@@ -22,7 +21,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    WorkoutComponent,
     SelectBodypartComponent,
     SelectTrainingDisciplineComponent,
     RecordWorkoutComponent,
