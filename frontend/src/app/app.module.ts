@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -14,7 +13,9 @@ import { WorkoutComponent } from './component/workout/workout.component';
 import { SelectBodypartComponent } from './component/select-bodypart/select-bodypart.component';
 import { SelectTrainingDisciplineComponent } from './component/select-training-discipline/select-training-discipline.component';
 import { RecordWorkoutComponent } from './component/record-workout/record-workout.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddTrainingDisciplineModalComponent } from './component/modal/add-training-discipline-modal/add-training-discipline-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { RecordWorkoutComponent } from './component/record-workout/record-workou
     SelectBodypartComponent,
     SelectTrainingDisciplineComponent,
     RecordWorkoutComponent,
+    AddTrainingDisciplineModalComponent,
     
   ],
   imports: [
@@ -33,7 +35,9 @@ import { RecordWorkoutComponent } from './component/record-workout/record-workou
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

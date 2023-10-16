@@ -2,7 +2,8 @@ import { Component,Input,OnInit, OnChanges, SimpleChanges  } from '@angular/core
 import { Router } from '@angular/router';
 import { TrainingDiscipline } from 'src/app/models/trainingDiscipline.model';
 import { SelectTrainingDisciplineService } from 'src/app/services/selectTrainingDiscipline/select-training-discipline.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { AddTrainingDisciplineModalComponent } from '../modal/add-training-discipline-modal/add-training-discipline-modal.component';
 
 
 
@@ -15,7 +16,7 @@ export class SelectTrainingDisciplineComponent {
   trainingDisciplines:TrainingDiscipline[];
   errorMessage:string;
  
-  constructor(private selectTrainingDisciplineService:SelectTrainingDisciplineService,private router:Router){
+  constructor(private selectTrainingDisciplineService:SelectTrainingDisciplineService,private router:Router,private dialog:MatDialog){
   }                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
   
   ngOnInit(){
@@ -26,7 +27,7 @@ export class SelectTrainingDisciplineComponent {
     
 
   }
-
+  //種目取得
   getTrainingDisciplines(bodyPartId:number){
     this.selectTrainingDisciplineService.getTrainingDisciplines(bodyPartId).subscribe({
       next:(response)=>{
@@ -39,7 +40,7 @@ export class SelectTrainingDisciplineComponent {
       }
     })
   }
-
+  //種目をローカルストレージへ保存
   saveTrainingDiscipline(discipline:TrainingDiscipline){
     const disciplineId=discipline.id;
     const disciplineName=discipline.name
@@ -48,6 +49,17 @@ export class SelectTrainingDisciplineComponent {
     localStorage.setItem("disciplineName",disciplineName);
     this.router.navigate(["/home/workout/recordWorkout"]);
     
+  }
+
+  //モーダルを開く
+  openModal(){
+    const dialog=this.dialog.open(AddTrainingDisciplineModalComponent);
+    //モーダルが閉じたとき
+    dialog.afterClosed()
+    .subscribe
+    (result=>{
+      console.log("モーダルが閉じられました")
+    })
   }
 
   
