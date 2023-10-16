@@ -21,7 +21,7 @@ export class AddTrainingDisciplineModalComponent {
     this.selectTrainingDisciplineService.registarTrainingDisciplines(bodyPartId,disciplineName)
     .subscribe({
       next:(response)=>{
-        console.log(response)
+        console.log(response+"が登録されました")
       },
       error:(error)=>{
         console.log(error)

@@ -1,4 +1,5 @@
 
+import e from "express";
 import { TrainingDiscipline } from "../models/trainingDiscipline";
 import { Workout } from "../models/workout";
 
@@ -31,8 +32,6 @@ const getTrainingDisciplines=async(bodyPartId:number)=>{
        if(!trainingDisciplines){
         return null;
        }
-       console.log("trainingDisciplines")
-       console.log(trainingDisciplines)
        return trainingDisciplines;
     } catch (error) {
         
@@ -43,8 +42,6 @@ const getTrainingDisciplines=async(bodyPartId:number)=>{
 //部位ID取得処理
 const getBodyPart=async(bodyPartName:any,req:any)=>{
     try {
-        console.log("bodyPartName")
-        console.log(bodyPartName)
         const bodyPart=await prisma.bodypart.findUnique({
             where:{
                 name:bodyPartName
@@ -57,19 +54,16 @@ const getBodyPart=async(bodyPartName:any,req:any)=>{
     }
     
 }
-
-const registTrainingDiscipline=async(trainingDisciplineName:string,trainingDisciplineBodyPartId:number)=>{
+//種目登録
+const registTrainingDiscipline=async(bodyPartId:number,disciplineName:string)=>{
     try {
-        console.log(trainingDisciplineName)
-        console.log(trainingDisciplineBodyPartId)
-
-        await prisma.training_discipline.create({
+        const registardDiscipline=await prisma.training_discipline.create({
             data:{
-                name:trainingDisciplineName,
-                bodypartId:trainingDisciplineBodyPartId
+                name:disciplineName,
+                bodypartId:bodyPartId
             }
         })
-        
+        return registardDiscipline;
     } catch (error) {
         console.log(error)
         

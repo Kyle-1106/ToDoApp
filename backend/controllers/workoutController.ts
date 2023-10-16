@@ -1,6 +1,5 @@
 import { BodyPart } from "../models/bodyPart"
 import { TrainingDiscipline } from "../models/trainingDiscipline";
-import { Workout } from "../models/workout";
 
 var workoutService = require('../services/workoutService');
 
@@ -24,11 +23,7 @@ const getBodyParts=async (req:any,res:any) =>{
 //部位ID取得
 const getBodyPartId=async(req:any,res:any)=>{
     try {
-        console.log("ewq")
-        console.log(req)
         const bodyPartName=req.query.name;
-        console.log("bodyPartName")
-        console.log(bodyPartName)
         const bodyPart=await workoutService.getBodyPart(bodyPartName);
         console.log(bodyPart)
         res.status(200).json(bodyPart);
@@ -43,11 +38,7 @@ const getBodyPartId=async(req:any,res:any)=>{
 const getTrainingDisciplines=async (req:any,res:any)=>{
     try {
         const bodyPartId=Number(req.query.id);
-        console.log("bodyPartId")
-        console.log(bodyPartId)
         const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPartId);
-        console.log("trainingDisciplines")
-        console.log(trainingDisciplines)
         res.status(200).json(trainingDisciplines)
     } catch (error) {
         console.log(error)
@@ -59,9 +50,9 @@ const getTrainingDisciplines=async (req:any,res:any)=>{
 //種目登録
 const registTrainingDiscipline=async(req:any,res:any)=>{
     try {
-        const name=req.body.id;
-        const id=req.body.name;
-        const trainingDisciplines=await workoutService.registTrainingDiscipline(name,id);
+        const bodyPartId:number=req.body.bodyPartId;
+        const disciplineName:string=req.body.bodyPartName;
+        const trainingDisciplines=await workoutService.registTrainingDiscipline(bodyPartId,disciplineName);
         res.status(200).json(trainingDisciplines)
     } catch (error) {
         console.log(error)

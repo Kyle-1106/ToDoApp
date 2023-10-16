@@ -28,11 +28,7 @@ const getBodyParts = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 //部位ID取得
 const getBodyPartId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("ewq");
-        console.log(req);
         const bodyPartName = req.query.name;
-        console.log("bodyPartName");
-        console.log(bodyPartName);
         const bodyPart = yield workoutService.getBodyPart(bodyPartName);
         console.log(bodyPart);
         res.status(200).json(bodyPart);
@@ -46,11 +42,7 @@ const getBodyPartId = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 const getTrainingDisciplines = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bodyPartId = Number(req.query.id);
-        console.log("bodyPartId");
-        console.log(bodyPartId);
         const trainingDisciplines = yield workoutService.getTrainingDisciplines(bodyPartId);
-        console.log("trainingDisciplines");
-        console.log(trainingDisciplines);
         res.status(200).json(trainingDisciplines);
     }
     catch (error) {
@@ -61,9 +53,9 @@ const getTrainingDisciplines = (req, res) => __awaiter(void 0, void 0, void 0, f
 //種目登録
 const registTrainingDiscipline = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const name = req.body.id;
-        const id = req.body.name;
-        const trainingDisciplines = yield workoutService.registTrainingDiscipline(name, id);
+        const bodyPartId = req.body.bodyPartId;
+        const disciplineName = req.body.bodyPartName;
+        const trainingDisciplines = yield workoutService.registTrainingDiscipline(bodyPartId, disciplineName);
         res.status(200).json(trainingDisciplines);
     }
     catch (error) {

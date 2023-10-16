@@ -35,8 +35,6 @@ const getTrainingDisciplines = (bodyPartId) => __awaiter(void 0, void 0, void 0,
         if (!trainingDisciplines) {
             return null;
         }
-        console.log("trainingDisciplines");
-        console.log(trainingDisciplines);
         return trainingDisciplines;
     }
     catch (error) {
@@ -45,8 +43,6 @@ const getTrainingDisciplines = (bodyPartId) => __awaiter(void 0, void 0, void 0,
 //部位ID取得処理
 const getBodyPart = (bodyPartName, req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("bodyPartName");
-        console.log(bodyPartName);
         const bodyPart = yield prisma.bodypart.findUnique({
             where: {
                 name: bodyPartName
@@ -58,16 +54,16 @@ const getBodyPart = (bodyPartName, req) => __awaiter(void 0, void 0, void 0, fun
         throw Error("部位IDを取得できませんでした");
     }
 });
-const registTrainingDiscipline = (trainingDisciplineName, trainingDisciplineBodyPartId) => __awaiter(void 0, void 0, void 0, function* () {
+//種目登録
+const registTrainingDiscipline = (bodyPartId, disciplineName) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(trainingDisciplineName);
-        console.log(trainingDisciplineBodyPartId);
-        yield prisma.training_discipline.create({
+        const registardDiscipline = yield prisma.training_discipline.create({
             data: {
-                name: trainingDisciplineName,
-                bodypartId: trainingDisciplineBodyPartId
+                name: disciplineName,
+                bodypartId: bodyPartId
             }
         });
+        return registardDiscipline;
     }
     catch (error) {
         console.log(error);

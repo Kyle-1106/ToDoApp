@@ -10,7 +10,7 @@ export class SelectTrainingDisciplineService {
   constructor(private http:HttpClient,private httpoption:HttpOptions) { }
   readonly httpOpions=this.httpoption.httpOptions;
   readonly geturl="http://localhost:3001/workout/getTrainingDisciplines";
-  readonly registurl="http://localhost:3001/workout/registTrainingDisciplines";
+  readonly registurl="http://localhost:3001/workout/registTrainingDiscipline";
 
   //種目取得
   getTrainingDisciplines(bodyPartId:number){
