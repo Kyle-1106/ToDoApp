@@ -1,0 +1,26 @@
+<div class="workout-log">
+    <h2>筋トレ記録確認</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>部位</th>
+          <th>種目</th>
+          <th>重さ</th>
+          <th>回数</th>
+          <th>RM</th>
+          <th>日付</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of workoutLogs">
+          <td>{{ log.bodyPartName }}</td>
+          <td>{{ log.training_discipline.name }}</td>
+          <td>{{ log.weight }} kg</td>
+          <td>{{ log.rep }}</td>
+          <td>{{ log.RM }}</td>
+          <td>{{ log.created_at | date: 'yyyy-MM-dd' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

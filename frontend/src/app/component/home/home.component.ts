@@ -1,0 +1,27 @@
+import { Component } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { GetUserService } from 'src/app/services/getUser/get-user.service'
+import { ActivatedRoute } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+
+
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent {
+  email:string|null;
+  constructor(private getUserService:GetUserService,private route: ActivatedRoute){
+    this.email=localStorage.getItem("email");
+  }   
+}
+  
+
+
+
+
+
+  
+

@@ -1,0 +1,76 @@
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0; // バックグラウンド色を設定
+
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      div {
+        color: red; // エラーメッセージの文字色
+        font-size: 12px;
+      }
+    }
+    .errorMessage {
+      color: red; // エラーメッセージの文字色
+      font-size: 12px;
+      margin-top: 5px; // エラーメッセージの上部のマージンを追加
+    }
+    
+    
+  
+    button {
+      background-color: #007bff; // ボタンの背景色を設定
+      color: #fff; // ボタンのテキスト色を設定
+      border: none;
+      border-radius: 3px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3; // ホバー時の背景色を設定
+      }
+    }
+  }
+  .signup{
+    background-color: rgb(240, 132, 132); 
+    color: white; 
+    border-radius: 3px;
+    &:hover {
+      background-color: red; 
+    }
+  }
+  
+}

@@ -1,0 +1,18 @@
+<div class="bodypart-container">
+    <div class="greeting">
+        <p>部位を選んでください</p>
+    </div>
+   
+    <div class="bodypart-buttons">
+        <button type="submit" class="btn chest-btn" (click)="navigateToTrainingDiscipline(1)">胸</button>
+        <button type="submit" class="btn back-btn" (click)="navigateToTrainingDiscipline(2)">背中</button>
+        <button type="submit" class="btn leg-btn" (click)="navigateToTrainingDiscipline(3)">脚</button>
+        <button type="submit" class="btn shoulder-btn" (click)="navigateToTrainingDiscipline(4)">肩</button>
+        <button type="submit" class="btn arm-btn" (click)="navigateToTrainingDiscipline(5)">腕</button>
+        <button type="submit" class="btn abs-btn" (click)="navigateToTrainingDiscipline(6)">腹</button>       
+    </div>
+    <div>
+        <button class="back" routerLink="/home">ホームへ戻る</button>
+    </div>
+    
+</div>
