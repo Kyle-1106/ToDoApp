@@ -78,6 +78,20 @@ const recordWorkout=async(req:any,res:any)=>{
    
 }
 
+//ワークアウト取得
+const getWorkout=async(req:any,res:any)=>{
+    try {
+        const userId:number=Number(req.query.userId);
+        const workouts=await workoutService.getWorkout(userId);
+        res.status(200).json(workouts);
+    } catch (error) {
+        console.log(error);
+        throw new Error("ワークアウトの取得ができません")
+
+        
+    }
+}
+
 
 
 
@@ -90,4 +104,5 @@ module.exports={
     registTrainingDiscipline,
     recordWorkout,
     getBodyPartId,
+    getWorkout,
 }

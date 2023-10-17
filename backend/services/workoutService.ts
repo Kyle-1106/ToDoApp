@@ -95,6 +95,37 @@ const recordWorkout=async(workout:any,res:any)=>{
 }
 
 
+//ワークアウト取得
+const getWorkout=async(userId:number,res:any)=>{
+    try {
+        const workoutsWithDetails = await prisma.workoutLog.findMany({
+            where: {
+              userId: userId, // 引数として渡された userId でフィルタリング
+            },
+            include: {
+              bodypart: {
+                select: {
+                  name: true, // Bodypart テーブルの name フィールドを取得
+                },
+              },
+              training_discipline: {
+                select: {
+                  name: true, // Training_discipline テーブルの name フィールドを取得
+                },
+              },
+            },
+          });
+          
+          console.log(workoutsWithDetails);
+          
+        return workoutsWithDetails;
+        
+    } catch (error) {
+        
+    }
+}
+
+
 
 module.exports={
     getAllBodyParts,
@@ -102,4 +133,5 @@ module.exports={
     registTrainingDiscipline,
     recordWorkout,
     getBodyPart,
+    getWorkout,
 }

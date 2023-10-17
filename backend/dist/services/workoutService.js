@@ -89,11 +89,38 @@ const recordWorkout = (workout, res) => __awaiter(void 0, void 0, void 0, functi
     catch (error) {
     }
 });
+//ワークアウト取得
+const getWorkout = (userId, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const workoutsWithDetails = yield prisma.workoutLog.findMany({
+            where: {
+                userId: userId, // 引数として渡された userId でフィルタリング
+            },
+            include: {
+                bodypart: {
+                    select: {
+                        name: true, // Bodypart テーブルの name フィールドを取得
+                    },
+                },
+                training_discipline: {
+                    select: {
+                        name: true, // Training_discipline テーブルの name フィールドを取得
+                    },
+                },
+            },
+        });
+        console.log(workoutsWithDetails);
+        return workoutsWithDetails;
+    }
+    catch (error) {
+    }
+});
 module.exports = {
     getAllBodyParts,
     getTrainingDisciplines,
     registTrainingDiscipline,
     recordWorkout,
     getBodyPart,
+    getWorkout,
 };
 //# sourceMappingURL=workoutService.js.map

@@ -7,6 +7,7 @@ import { authGuard } from './guard/auth.guard';
 import { SelectBodypartComponent } from './component/select-bodypart/select-bodypart.component';
 import { SelectTrainingDisciplineComponent } from './component/select-training-discipline/select-training-discipline.component';
 import { RecordWorkoutComponent } from './component/record-workout/record-workout.component';
+import { RecordComponent } from './component/record/record.component';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:"home/workout/selectBodyPart",component:SelectBodypartComponent,canActivate:[authGuard]},
   {path:"home/workout/selectTrainingDiscipline",component:SelectTrainingDisciplineComponent,canActivate:[authGuard]},
   {path:"home/workout/recordWorkout",component:RecordWorkoutComponent,canActivate:[authGuard]},
+  {path:"home/record",component:RecordComponent,canActivate:[authGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   // //後で404エラーページ作成
   // { path: '**', redirectTo: '/login' } 

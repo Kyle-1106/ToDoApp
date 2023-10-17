@@ -77,11 +77,24 @@ const recordWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         throw new Error("ワークアウトの登録ができません");
     }
 });
+//ワークアウト取得
+const getWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = Number(req.query.userId);
+        const workouts = yield workoutService.getWorkout(userId);
+        res.status(200).json(workouts);
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error("ワークアウトの取得ができません");
+    }
+});
 module.exports = {
     getBodyParts,
     getTrainingDisciplines,
     registTrainingDiscipline,
     recordWorkout,
     getBodyPartId,
+    getWorkout,
 };
 //# sourceMappingURL=workoutController.js.map

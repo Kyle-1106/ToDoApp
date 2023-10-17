@@ -15,6 +15,7 @@ import { RecordWorkoutComponent } from './component/record-workout/record-workou
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddTrainingDisciplineModalComponent } from './component/modal/add-training-discipline-modal/add-training-discipline-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RecordComponent } from './component/record/record.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SelectTrainingDisciplineComponent,
     RecordWorkoutComponent,
     AddTrainingDisciplineModalComponent,
+    RecordComponent,
     
   ],
   imports: [
