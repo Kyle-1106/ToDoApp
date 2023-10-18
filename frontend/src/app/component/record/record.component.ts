@@ -12,10 +12,10 @@ export class RecordComponent {
   workout:Workout;
   userId:number;
   workoutLogs:any;
-  // data:any;
   selctedBodyPart:string;
   selectedBodypart:any;
   selectedWorkoutLogs:any;
+  showButton:boolean;
 
 
   constructor(private recordWorkoutService:RecordWorkoutService){}
@@ -46,6 +46,7 @@ export class RecordComponent {
       return item.bodypart.name==bodyPart;
     })
     this.selectedWorkoutLogs=filterd;
+    this.showButton=true;
   }
 
   //部位名を翻訳

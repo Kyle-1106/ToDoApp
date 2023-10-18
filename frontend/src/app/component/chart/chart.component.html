@@ -1,1 +1,11 @@
 <p>chart works!</p>
+<button *ngIf="showButton" (click)="createChart()">グラフ作成</button>
+<ngx-charts-bar-horizontal *ngIf="showChart"
+      [results]="chartData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'日付'"
+      [yAxisLabel]="'RM'"
+    ></ngx-charts-bar-horizontal>

@@ -1,5 +1,5 @@
 <div class="workout-log">
-    <!-- <app-chart [data]="data"></app-chart> -->
+    
     <h2>筋トレ記録確認</h2>
     <select name="selectedBodyPart" id="selectedBodyPart" [(ngModel)]="selctedBodyPart">
       <option value="胸">胸</option>
@@ -10,6 +10,8 @@
       <option value="腹筋">腹筋</option>
     </select>
     <button type="button" (click)="sortbyBodyPart()">検索</button>
+    <app-chart [showButton]="this.showButton" [selectedWorkoutLogs]="this.selectedWorkoutLogs"></app-chart>
+    
     <table>
       <thead>
         <tr>

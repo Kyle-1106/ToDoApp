@@ -7,7 +7,35 @@ import { Component, Input } from '@angular/core';
 })
 export class ChartComponent {
 
-  // @Input() data = ''; 
+  @Input() showButton:boolean=false; 
+  @Input() selectedWorkoutLogs:any[];
+  chartData: any[] = [];
+  showChart:boolean;
+
+  createChart(){
+    const groupedData=new Map<string,number>();
+    this.selectedWorkoutLogs.forEach((item:any)=>{
+      const date=new Date(item.created_at).toLocaleDateString();
+      const existingTotal = groupedData.get(date) || 0;
+      groupedData.set(date, existingTotal + item.RM);
+
+      this.chartData = [];
+      groupedData.forEach((value, key) => {
+      this.chartData.push({
+        name: key,
+        value: value,
+      });
+    });
+    this.showChart=true
+      return groupedData;
+    })
+
+
+
+
+  }
+  
+
 
   // グラフの表示サイズ
   view: any[] = [700, 400];
