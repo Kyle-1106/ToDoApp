@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddTrainingDisciplineModalComponent } from './component/modal/add-training-discipline-modal/add-training-discipline-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RecordComponent } from './component/record/record.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartComponent } from './component/chart/chart.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,7 @@ import { RecordComponent } from './component/record/record.component';
     RecordWorkoutComponent,
     AddTrainingDisciplineModalComponent,
     RecordComponent,
+    ChartComponent,
     
   ],
   imports: [
@@ -37,7 +41,10 @@ import { RecordComponent } from './component/record/record.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserModule,
+    NgxChartsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

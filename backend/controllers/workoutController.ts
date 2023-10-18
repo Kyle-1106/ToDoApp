@@ -83,6 +83,7 @@ const getWorkout=async(req:any,res:any)=>{
     try {
         const userId:number=Number(req.query.userId);
         const workouts=await workoutService.getWorkout(userId);
+        console.log(workouts)
         res.status(200).json(workouts);
     } catch (error) {
         console.log(error);
