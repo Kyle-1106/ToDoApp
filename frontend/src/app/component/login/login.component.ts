@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
-import { Login } from 'src/app/models/login.model';
-import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login/login.service';
 
 
@@ -44,6 +41,10 @@ export class LoginComponent {
         },
       })
     }
+  }
+  isLoginbuttobValid(){
+    return this.loginForm.invalid
+
   }
 
 }
