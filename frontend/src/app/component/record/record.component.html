@@ -10,7 +10,7 @@
       <option value="腹筋">腹筋</option>
     </select>
     <button type="button" (click)="sortbyBodyPart()">検索</button>
-    <app-chart [showButton]="this.showButton" [selectedWorkoutLogs]="this.selectedWorkoutLogs"></app-chart>
+    
     
     <table>
       <thead>
@@ -34,5 +34,6 @@
         </tr>
       </tbody>
     </table>
+    <app-chart [showButton]="this.showButton" [selectedWorkoutLogs]="this.selectedWorkoutLogs"></app-chart>
   </div>
   
