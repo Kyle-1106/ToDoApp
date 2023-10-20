@@ -5,6 +5,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Auth } from 'src/app/models/auth.interface';
 import { HttpOptions } from 'src/app/config/httpOption';
 import { Urls } from 'src/app/config/urls';
+import { ErrorMessages } from 'src/app/config/errorMessages';
 
 
 
@@ -14,17 +15,22 @@ import { Urls } from 'src/app/config/urls';
 })
 export class LoginService {
 
-  constructor(private http:HttpClient,private httpoption:HttpOptions,private urls:Urls) { }
+  constructor(
+    private http:HttpClient,
+    private httpoption:HttpOptions,
+    private urls:Urls,
+    private errorMessages:ErrorMessages) { }
 
   readonly httpOptions=this.httpoption.httpOptions
   readonly loginURL=this.urls.login;
 
   //ログイン処理
 login(loginForm: Login): Observable<Auth> {
-  return this.http.post<Auth>(this.loginURL, loginForm, this.httpOptions).pipe(
+  return this.http.post<Auth>(this.loginURL, loginForm, this.httpOptions)
+  .pipe(
     catchError((error) => {
       console.log("エラー:"+error);
-      return throwError('ログインに失敗しました。');
+      return throwError(this.errorMessages.failedLogin);
     })
   );
 }

@@ -6,7 +6,9 @@ import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { SignupUser } from 'src/app/models/signupUser.model'; 
 import { HttpOptions } from 'src/app/config/httpOption';
-import { Auth } from 'src/app/models/auth.model';
+import { Auth } from 'src/app/models/auth.interface';
+import { Urls } from 'src/app/config/urls';
+import { ErrorMessages } from 'src/app/config/errorMessages';
 
 @Injectable({
   providedIn: 'root'
@@ -25,14 +27,20 @@ export class SignupService {
     }
   }
 
-  constructor(private http:HttpClient,private httpoption:HttpOptions) { }
+  constructor(
+    private http:HttpClient,
+    private httpoption:HttpOptions,
+    private urls:Urls,
+    private errorMessages:ErrorMessages) { }
   //HeaderOptionの設定
   readonly httpOptions =this.httpoption.httpOptions
-  readonly url="http://localhost:3001/user/signup"
+  readonly url=this.urls.signup;
   signupUser(formData:SignupUser):Observable<Auth>{
-    return this.http.post<Auth>(this.url,formData,this.httpOptions).pipe(
+    return this.http.post<Auth>(this.url,formData,this.httpOptions)
+    .pipe(
       catchError((error) => {
-        return throwError("入力されたメールアドレスはすでに登録されています")
+        console.log("エラー:"+error);
+        return throwError(this.errorMessages.failedCreateUser);
       })
     );
   }

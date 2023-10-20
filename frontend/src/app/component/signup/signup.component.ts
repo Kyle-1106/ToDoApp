@@ -1,9 +1,10 @@
+import { ErrorMessages } from './../../config/errorMessages';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { SignupService } from '../../services/signup/signup.service';
-import { SignupUser } from 'src/app/models/signupUser.model';
-import { LoginService } from 'src/app/services/login/login.service';
 import { Router } from '@angular/router';
+import { JwtService } from 'src/app/services/jwt/jwt.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +19,12 @@ export class SignupComponent {
   confirmPassword:FormControl;
   errorMessage:string;  
 
-  constructor(private formBuilder:FormBuilder,private signupservice:SignupService,private loginService:LoginService,private router:Router){
+  constructor(
+    private formBuilder:FormBuilder,
+    private signupservice:SignupService,
+    private jwtService:JwtService,
+    private router:Router,
+    private errorMessages:ErrorMessages){
     //各項目にバリデーション追加
     this.name=new FormControl("",[Validators.required]);
     this.email=new  FormControl("",[Validators.required,Validators.email]);
@@ -35,24 +41,35 @@ export class SignupComponent {
     {//カスタムバリデーション
       validators: this.signupservice.passwordMatchValidator
     })
-
     this.errorMessage="";
   }
 
   //新規会員登録
   signupUser(){
     const formData = this.signupForm.value;
-    this.signupservice.signupUser(formData).subscribe({
-      next: (response) => {
-        console.log('POSTリクエスト成功:', response);
-        this.loginService.saveToken(response)
-        this.router.navigate(["/home"],{queryParams:{email:this.email}});
-      },
-      error: (error) => {
-        console.error('Error creating user:', error);
-        this.errorMessage=error;
-      },
-    });
+    try {
+      //入力内容確認
+      if(!this.signupForm.value){
+        this.errorMessage=this.errorMessages.inputInvalid;
+        throw new Error(this.errorMessage);
+      }
+      this.signupservice.signupUser(formData).subscribe({
+        next: (response) => {
+          //JWTの保存
+          this.jwtService.saveToken(response)
+          //ホーム画面への遷移
+          this.router.navigate(["/home"]);
+        },
+        error: (error) => {
+          console.error('エラー:', error);
+          this.errorMessage=error;
+        },
+      });
+    } catch (error) {
+      console.log('エラー:'+this.errorMessage)
+    }
+    
+    
 
   }
 }
