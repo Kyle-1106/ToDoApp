@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { SignupUser } from 'src/app/models/signupUser.model'; 
+import { SignupUser } from 'src/app/models/signupUser.interface'; 
 import { HttpOptions } from 'src/app/config/httpOption';
 import { Auth } from 'src/app/models/auth.interface';
 import { Urls } from 'src/app/config/urls';

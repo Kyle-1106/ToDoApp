@@ -1,19 +1,18 @@
-import { User } from "@prisma/client";
-
-var { PrismaClient } = require('@prisma/client');
-
+import { PrismaClient } from "@prisma/client";
+import { SignupUser } from "../interfaces/signupUser";
+import { User } from "../interfaces/user";
+var errorMessageService=require('../services/errorMessageService')
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
 
+const saltRounds = 10;
 const prisma = new PrismaClient({
   log: ['query', 'info', 'warn', 'error'],
 });
 
 
 //新規登録
-const createUser = async (userData: any) => {
+const createUser = async (userData: SignupUser) => {
   try {
-    delete userData.confirmPassword;
     //パスワードハッシュ化
     const hashedPassword:string = await bcrypt.hash(userData.password, saltRounds);
     //会員登録
@@ -29,7 +28,7 @@ const createUser = async (userData: any) => {
   } 
   catch (error) {
     await prisma.$disconnect();
-    throw new Error("そのメールアドレスはすでに登録されています");
+    throw new Error(errorMessageService.duplicateUser);
   }
   
 };
@@ -40,7 +39,7 @@ const createUser = async (userData: any) => {
 const selectUser=async (userData:User,user:User)=>{
   try {
     const email=userData.email;
-    const user:User= await prisma.user.findUnique({
+    const user:User|null= await prisma.user.findUnique({
       where: {
         email:email
       },

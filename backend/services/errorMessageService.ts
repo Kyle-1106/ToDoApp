@@ -1,10 +1,14 @@
 
 
-const requestInvalid="リクエストが有効ではありません"
-const invalidLoginData="ログインデータが有効ではありません"
-const failedCreateToken="トークンの作成に失敗しました"
-const failedLogin="ログインに失敗しました"
-const incorectPassword="パスワードが有効ではありません"
+const requestInvalid:string="リクエストが有効ではありません"
+const invalidLoginData:string="ログインデータが有効ではありません"
+const invalidSignupData:string="登録情報が有効ではありません"
+const failedCreateToken:string="トークンの作成に失敗しました"
+const failedLogin:string="ログインに失敗しました"
+const incorectPassword:string="パスワードが有効ではありません"
+const duplicateUser:string="そのメールアドレスはすでに登録されています"
+
+
 
 
 module.exports={
@@ -13,4 +17,5 @@ module.exports={
   failedCreateToken,
   failedLogin,
   incorectPassword,
+  duplicateUser,
 }
