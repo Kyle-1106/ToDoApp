@@ -1,16 +1,17 @@
-import { User } from "@prisma/client";
 import { JWT } from "../models/jwt";
 import { Login } from "../models/login";
+import { User } from "../models/user";
 
 var userService=require('../services/userService')
+var errorMessageService=require('../services/errorMessageService')
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var config = require('../config/jwt.config');
 
 
 
-//パスワード認証とトークン発行
-const loginCheck=async (loginData:Login,jwtBody:JWT) =>{
+//パスワード認証とJWT発行
+const loginCheck=async (loginData:Login) =>{
     try {
         //該当ユーザ取得
         const user:User=await userService.selectUser(loginData);
@@ -19,7 +20,7 @@ const loginCheck=async (loginData:Login,jwtBody:JWT) =>{
         const password=loginData.password; 
         const compare:boolean=await bcrypt.compare(password,hashdPassword);
         if(!compare){
-            throw new Error("パスワードが正しくありません");
+            throw new Error(errorMessageService.incorectPassword);
         }
         //jwtの作成
         const payload = {
@@ -32,9 +33,11 @@ const loginCheck=async (loginData:Login,jwtBody:JWT) =>{
             email:user.email,
             token:token,
         }
+
         return jwtBody;
     } catch (error) {
-       console.log(error)
+      console.log(error);
+      throw error;
     }
     
 }
