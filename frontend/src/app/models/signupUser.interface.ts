@@ -1,4 +1,4 @@
-export class SignupUser {
+export interface SignupUser {
     username: string;
     email: string;
     password:string
