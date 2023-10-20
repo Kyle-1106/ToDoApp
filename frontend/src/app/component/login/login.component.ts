@@ -48,7 +48,7 @@ export class LoginComponent {
     }
     
   }
-  
+  //ログインボタン有効化
   isLoginbuttobValid(){
     return this.loginForm.invalid
 
