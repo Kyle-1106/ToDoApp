@@ -21,15 +21,11 @@ app.use(cors({
 }))
 
 
-// view engine setup
-app.set('views', path.join('views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join('public')));
 
 
 //ルーティング処理
