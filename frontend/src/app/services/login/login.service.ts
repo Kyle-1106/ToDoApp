@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Login } from 'src/app/models/login.model';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Token } from '@angular/compiler';
-import { Auth } from 'src/app/models/auth.model';
+import { Auth } from 'src/app/models/auth.interface';
 import { HttpOptions } from 'src/app/config/httpOption';
-import { getLocaleExtraDayPeriodRules } from '@angular/common';
+import { Urls } from 'src/app/config/urls';
 
 
 
@@ -16,36 +14,25 @@ import { getLocaleExtraDayPeriodRules } from '@angular/common';
 })
 export class LoginService {
 
-  constructor(private http:HttpClient,private httpoption:HttpOptions) { }
+  constructor(private http:HttpClient,private httpoption:HttpOptions,private urls:Urls) { }
 
-  //HeaderOptionの設定
   readonly httpOptions=this.httpoption.httpOptions
-  readonly url="http://localhost:3001/login"
-//ログイン処理
+  readonly loginURL=this.urls.login;
+
+  //ログイン処理
 login(loginForm: Login): Observable<Auth> {
-  // ログイン情報を送信
-  return this.http.post<Auth>(this.url, loginForm, this.httpOptions).pipe(
+  return this.http.post<Auth>(this.loginURL, loginForm, this.httpOptions).pipe(
     catchError((error) => {
+      console.log("エラー:"+error);
       return throwError('ログインに失敗しました。');
     })
   );
 }
 
-  //トークンの保存
-  saveToken(response:Auth):void{
-    console.log(response)
-    const idString=String(response.userId);
-    localStorage.setItem("id",idString);
-    localStorage.setItem("jwt",response.token);
-    localStorage.setItem("email",response.email);
-  }
-
-  //トークンの取得
   
-
-  //ログイン判別
+  //ログイン判
    islogin():boolean{
-    const token=localStorage.getItem("jwt");
+    const token=sessionStorage.getItem("jwt");
     //ログイン時
     if(token){
       return true;

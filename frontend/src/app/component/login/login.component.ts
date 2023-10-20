@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ErrorMessages } from 'src/app/config/errorMessages';
+import { JwtService } from 'src/app/services/jwt/jwt.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
 
@@ -12,36 +14,41 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage:string;
-  constructor(private formBuilder: FormBuilder,private loginService:LoginService,private router:Router) {
+
+  constructor(private formBuilder: FormBuilder,private loginService:LoginService,private router:Router,private jwtService:JwtService,private errorMessages:ErrorMessages) {
     //バリデーション追加
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-    this.errorMessage=""
+    this.errorMessage="";
   }
 //ログイン処理
   onLogin():void{
-    if (this.loginForm.valid) {
-      //フォームが有効な場合、ここで送信処理を実行
-      const formData = this.loginForm.value;
+    const formData = this.loginForm.value;
+    try {
+      if(!this.loginForm.valid){
+        this.errorMessage=this.errorMessages.inputInvalid;
+        throw new Error(this.errorMessage)
+      }
       this.loginService.login(formData).subscribe({
         next: (response) => {
-          console.log("response")
-          console.log(response)
           //JWTの保存
-          this.loginService.saveToken(response);
+          this.jwtService.saveToken(response);
           //ホーム画面への遷移
-          const email=localStorage.getItem("email")
-          this.router.navigate(["/home"],{queryParams:{email:email}});
+          this.router.navigate(["/home"]);
         },
         error: (error) => {
-          console.error('Error login:', error);
-          this.errorMessage ="メールアドレスかパスワードが間違っています"; 
+          console.log("エラー:"+error);
+          this.errorMessage =this.errorMessages.emailOrPasswordInvalid;
         },
       })
+    } catch (error) {
+      console.log("エラー:"+this.errorMessage); 
     }
+    
   }
+  
   isLoginbuttobValid(){
     return this.loginForm.invalid
 
