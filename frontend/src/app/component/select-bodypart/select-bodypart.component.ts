@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectBodyPartService } from 'src/app/services/selectBodyPart/select-body-part.service';
 
 @Component({
   selector: 'app-select-bodypart',
@@ -9,14 +8,15 @@ import { SelectBodyPartService } from 'src/app/services/selectBodyPart/select-bo
 })
 export class SelectBodypartComponent {
   bodyPartId:number;
-  constructor(private router:Router,private selectBodyPartService:SelectBodyPartService){}
+  constructor(
+    private router:Router,){}
   
+  //部位選択画面遷移
   navigateToTrainingDiscipline(bodyPartId:number){
     this.bodyPartId=bodyPartId;
     const bodyPartIdString:string=String(bodyPartId);
-    localStorage.setItem("bodyPartId",bodyPartIdString)
+    sessionStorage.setItem("bodyPartId",bodyPartIdString)
     this.router.navigate(["home/workout/selectTrainingDiscipline"]);   
-  }
-   
+  } 
 
 }
