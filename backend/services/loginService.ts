@@ -1,6 +1,6 @@
-import { JWT } from "../models/jwt";
-import { Login } from "../models/login";
-import { User } from "../models/user";
+import { JWT } from "../interfaces/jwt";
+import { Login } from "../interfaces/login";
+import { User } from "../interfaces/user";
 
 var userService=require('../services/userService')
 var errorMessageService=require('../services/errorMessageService')
@@ -25,11 +25,13 @@ const loginCheck=async (loginData:Login) =>{
         //jwtの作成
         const payload = {
             id:user.id,
+            name:user.name,
             email: user.email
           };
         const token=jwt.sign(payload,config.jwt.secret,config.jwt.options);
         const jwtBody:JWT={
             userId:user.id,
+            name:user.name,
             email:user.email,
             token:token,
         }

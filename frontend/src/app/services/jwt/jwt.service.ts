@@ -12,6 +12,7 @@ export class JwtService {
   saveToken(response:Auth):void{
     const idString=String(response.userId);
     sessionStorage.setItem("id",idString);
+    sessionStorage.setItem("name",response.name);
     sessionStorage.setItem("jwt",response.token);
     sessionStorage.setItem("email",response.email);
   }
