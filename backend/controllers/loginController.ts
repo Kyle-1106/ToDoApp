@@ -1,5 +1,5 @@
-import { JWT } from "../models/jwt";
-import { Login } from "../models/login";
+import { JWT } from "../interfaces/jwt";
+import { Login } from "../interfaces/login";
 import { Response } from 'express';
 
 var errorMessageService = require( '../services/errorMessageService');
@@ -12,12 +12,13 @@ var loginService = require('../services/loginService');
 const login = async (req:Request, res:Response):Promise<void> => {
 
     try {
+      //リクエスト内容検証
       if(req.body==null){
         const errorMessage:string=errorMessageService.requestInvalid;        
         throw new Error(errorMessage)
       }
 
-      const requestBody = req.body;
+      const requestBody:ReadableStream<Uint8Array> = req.body;
 
       //型ガード
       if (!isValidLogin(requestBody)) {
