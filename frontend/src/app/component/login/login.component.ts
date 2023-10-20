@@ -15,7 +15,12 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage:string;
 
-  constructor(private formBuilder: FormBuilder,private loginService:LoginService,private router:Router,private jwtService:JwtService,private errorMessages:ErrorMessages) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService:LoginService,
+    private router:Router,
+    private jwtService:JwtService,
+    private errorMessages:ErrorMessages) {
     //バリデーション追加
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -27,6 +32,7 @@ export class LoginComponent {
   onLogin():void{
     const formData = this.loginForm.value;
     try {
+      //ログイン情報確認
       if(!this.loginForm.valid){
         this.errorMessage=this.errorMessages.inputInvalid;
         throw new Error(this.errorMessage)
