@@ -36,7 +36,7 @@ login(loginForm: Login): Observable<Auth> {
 }
 
   
-  //ログイン判
+  //ログイン判定
    islogin():boolean{
     const token=sessionStorage.getItem("jwt");
     //ログイン時

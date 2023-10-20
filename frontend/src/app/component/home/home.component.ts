@@ -13,8 +13,9 @@ import { Observable, throwError } from 'rxjs';
 })
 export class HomeComponent {
   email:string|null;
+  name:string|null;
   constructor(private getUserService:GetUserService,private route: ActivatedRoute){
-    this.email=localStorage.getItem("email");
+    this.name=sessionStorage.getItem("name");
   }   
 }
   
