@@ -36,7 +36,7 @@ export class RecordWorkoutComponent {
   ngOnInit(){
     this.trainingDiscipline=sessionStorage.getItem("disciplineName");
   }
-
+//ワークアウト登録処理
   recordWorkout(){
     const formData=this.workoutForm.value;
     const userIdString:string|null=sessionStorage.getItem("id");
@@ -54,11 +54,9 @@ export class RecordWorkoutComponent {
       reps:formData.reps,
       memo:formData.memo
     }
-    console.log(workoutInfo)
     //登録処理
     this.recordWorkoutService.recordWorkout(workoutInfo).subscribe({
       next:(response)=>{
-        console.log(response);
       },
       error:(error)=>{
         console.log(error);
@@ -69,7 +67,6 @@ export class RecordWorkoutComponent {
     sessionStorage.removeItem("disciplineId");
     sessionStorage.removeItem("disciplineName");
     this.router.navigate(["/home/workout/selectBodyPart"]);
-     
     
   }
 

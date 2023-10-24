@@ -1,3 +1,4 @@
+import { Urls } from 'src/app/config/urls';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -10,14 +11,17 @@ import { WorkoutLog } from 'src/app/models/workoutLog.model';
 })
 export class RecordWorkoutService {
 
-  constructor(private http:HttpClient,private httpoption:HttpOptions) { }
+  constructor(
+    private http:HttpClient,
+    private httpoption:HttpOptions,
+    private urls:Urls) { }
 
   readonly httpoptions=this.httpoption.httpOptions;
-  readonly registarurl="http://localhost:3001/workout/recordWorkout"
-  readonly geturl="http://localhost:3001/workout/getWorkout"
+  readonly registarurl=this.urls.registarWorkout;
+  readonly geturl=this.urls.getWorkout;
 
   //ワークアウト登録処理
-  recordWorkout(workoutInfo:any):Observable<Workout>{
+  recordWorkout(workoutInfo:Workout):Observable<Workout>{
     return this.http.post<Workout>(this.registarurl,workoutInfo,this.httpoptions)
   }
 
