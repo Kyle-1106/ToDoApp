@@ -1,10 +1,12 @@
+import { throwError } from 'rxjs';
 
 import e from "express";
-import { TrainingDiscipline } from "../models/trainingDiscipline";
-import { Workout } from "../models/workout";
+import { TrainingDiscipline } from "../interfaces/trainingDiscipline";
+import { Workout } from "../interfaces/workout";
 
 var { PrismaClient } = require('@prisma/client');
 var { Bodypart } = require( "../models/bodyPart");
+var errorService =require("../services/errorMessageService");
 
 const prisma = new PrismaClient({
     log: ['query', 'info', 'warn', 'error'],
@@ -12,48 +14,57 @@ const prisma = new PrismaClient({
 
 
   //部位取得処理
-const getAllBodyParts=async (res:typeof Bodypart[])=> {
+const getAllBodyParts=async ()=> {
     try {
+      //部位名取得
         const allBodyParts=await prisma.bodypart.findMany();
+        if(!allBodyParts){
+          throw new Error(errorService.failedGetBodyParts)
+        }
+        await prisma.$disconnect();
         return allBodyParts;
     } catch (error) {
-        console.log("エラー",error)   
+        throw error;
     }   
 }
 
-//部位名取得処理
-const getTrainingDisciplines=async(bodyPartId:number)=>{
-    try {
-       const trainingDisciplines:TrainingDiscipline[]=await prisma.training_discipline.findMany({
-        where:{
-            bodypartId:bodyPartId
-        }
-       });
-       if(!trainingDisciplines){
-        return null;
-       }
-       return trainingDisciplines;
-    } catch (error) {
-        
-    }
-}
-
-
 //部位ID取得処理
 const getBodyPart=async(bodyPartName:any,req:any)=>{
-    try {
-        const bodyPart=await prisma.bodypart.findUnique({
-            where:{
-                name:bodyPartName
-            },
-        })
-        return bodyPart;
-        
-    } catch (error) {
-        throw Error("部位IDを取得できませんでした")
-    }
-    
+  try {
+      const bodyPart=await prisma.bodypart.findUnique({
+          where:{
+              name:bodyPartName
+          },
+      })
+      return bodyPart;
+      
+  } catch (error) {
+      throw Error("部位IDを取得できませんでした")
+  }
+  
 }
+
+//種目名取得処理
+const getTrainingDisciplines=async(bodyPartId:number)=>{
+    try {
+       const trainingDisciplines:TrainingDiscipline=await prisma.training_discipline.findMany({
+        where:{
+            bodypartId:bodyPartId
+        },
+       })
+       if(!trainingDisciplines){
+        throw new Error(errorService.failedGetBodyParts)
+       }
+       await prisma.$disconnect;
+       return trainingDisciplines;
+    } catch (error) {
+      console.log(error)
+      await prisma.$disconnect;
+    }
+}
+
+
+
 //種目登録
 const registTrainingDiscipline=async(bodyPartId:number,disciplineName:string)=>{
     try {

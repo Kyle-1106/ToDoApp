@@ -7,6 +7,7 @@ const failedCreateToken:string="トークンの作成に失敗しました"
 const failedLogin:string="ログインに失敗しました"
 const incorectPassword:string="パスワードが有効ではありません"
 const duplicateUser:string="そのメールアドレスはすでに登録されています"
+const failedGetBodyParts:string="部位名の取得に失敗しました"
 
 
 
@@ -18,4 +19,5 @@ module.exports={
   failedLogin,
   incorectPassword,
   duplicateUser,
+  failedGetBodyParts
 }

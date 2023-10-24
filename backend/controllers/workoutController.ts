@@ -1,22 +1,26 @@
-import { BodyPart } from "../models/bodyPart"
-import { TrainingDiscipline } from "../models/trainingDiscipline";
-
+import { BodyPart } from "../interfaces/bodyPart"
+import { TrainingDiscipline } from "../interfaces/trainingDiscipline";
+import { Response } from 'express';
 var workoutService = require('../services/workoutService');
+var errorMessageService = require( '../services/errorMessageService');
 
 
 //部位名取得
-const getBodyParts=async (req:any,res:any) =>{
+const getBodyParts=async (req:Request,res:Response) =>{
     try {
+      //リクエスト内容検証
+      if(req.body==null){
+        const errorMessage:string=errorMessageService.requestInvalid;        
+        throw new Error(errorMessage)
+      }
+      
         //部位名を取得
         const allBodyParts:typeof BodyPart=await workoutService.getAllBodyParts();
-        if(!allBodyParts){
-            throw new Error("部位名を取得できませんでした");
-        }
         res.status(200).json(allBodyParts);
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ error: '部位名の取得に失敗しました。' });
+        res.status(500).json({ error:error });
     }   
 }
 

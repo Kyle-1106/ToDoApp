@@ -35,7 +35,6 @@ const loginCheck=async (loginData:Login) =>{
             email:user.email,
             token:token,
         }
-
         return jwtBody;
     } catch (error) {
       console.log(error);
