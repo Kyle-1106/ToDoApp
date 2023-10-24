@@ -15,9 +15,9 @@ var workoutRouter = require('./routes/workoutRoutes');
 //CORS許可
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:4200', //アクセス許可するオリジン
-    credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
-    optionsSuccessStatus: 200 //レスポンスstatusを200に設定
+    origin: 'http://localhost:4200', 
+    credentials: true,
+    optionsSuccessStatus: 200 
 }))
 
 
