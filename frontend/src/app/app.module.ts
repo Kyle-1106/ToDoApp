@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RecordComponent } from './component/record/record.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartComponent } from './component/chart/chart.component';
+import { HeaderComponent } from './component/header/header.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ChartComponent } from './component/chart/chart.component';
     AddTrainingDisciplineModalComponent,
     RecordComponent,
     ChartComponent,
+    HeaderComponent,
     
   ],
   imports: [

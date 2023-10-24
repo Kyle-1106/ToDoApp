@@ -21,7 +21,7 @@ export class RecordComponent {
   constructor(private recordWorkoutService:RecordWorkoutService){}
 
   ngOnInit(){
-    const userIdstring:string|null=localStorage.getItem("id");
+    const userIdstring:string|null=sessionStorage.getItem("id");
     const userId:number=Number(userIdstring);
     this.recordWorkoutService.getWorkout(userId)
     .subscribe({

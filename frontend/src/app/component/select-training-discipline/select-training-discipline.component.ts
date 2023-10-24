@@ -20,18 +20,16 @@ export class SelectTrainingDisciplineComponent {
   }                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
   
   ngOnInit(){
-    const bodyPartId=Number(localStorage.getItem("bodyPartId"));
+    const bodyPartId=Number(sessionStorage.getItem("bodyPartId"));
     if(!bodyPartId){
     }
     this.getTrainingDisciplines(bodyPartId);
-    
-
   }
+
   //種目取得
   getTrainingDisciplines(bodyPartId:number){
     this.selectTrainingDisciplineService.getTrainingDisciplines(bodyPartId).subscribe({
       next:(response)=>{
-        console.log(response)
        this.trainingDisciplines=response
       
       },
@@ -45,20 +43,28 @@ export class SelectTrainingDisciplineComponent {
     const disciplineId=discipline.id;
     const disciplineName=discipline.name
     const disciplineIdtoString:string=String(disciplineId);
-    localStorage.setItem("disciplineId",disciplineIdtoString);
-    localStorage.setItem("disciplineName",disciplineName);
+    sessionStorage.setItem("disciplineId",disciplineIdtoString);
+    sessionStorage.setItem("disciplineName",disciplineName);
     this.router.navigate(["/home/workout/recordWorkout"]);
     
   }
 
   //モーダルを開く
   openModal(){
-    const dialog=this.dialog.open(AddTrainingDisciplineModalComponent);
+    const dialog=this.dialog.open(AddTrainingDisciplineModalComponent,{
+      width: '300px',
+      height: '200px',
+      disableClose: true,   // モーダルの外側をクリックして閉じるのを無効化
+      autoFocus: true,      // モーダルが表示されたときに自動的にフォーカスを設定
+      backdropClass: 'custom-backdrop', // バックドロップ（モーダルの背後）に適用するCSSクラス
+      panelClass: 'custom-modal'     
+    });
     //モーダルが閉じたとき
     dialog.afterClosed()
     .subscribe
     (result=>{
-      console.log("モーダルが閉じられました")
+      const bodyPartId=Number(sessionStorage.getItem("bodyPartId"));
+    this.getTrainingDisciplines(bodyPartId);
     })
   }
 

@@ -1,11 +1,7 @@
-import { throwError } from 'rxjs';
-
-import e from "express";
 import { TrainingDiscipline } from "../interfaces/trainingDiscipline";
 import { Workout } from "../interfaces/workout";
 
 var { PrismaClient } = require('@prisma/client');
-var { Bodypart } = require( "../models/bodyPart");
 var errorService =require("../services/errorMessageService");
 
 const prisma = new PrismaClient({
@@ -24,6 +20,7 @@ const getAllBodyParts=async ()=> {
         await prisma.$disconnect();
         return allBodyParts;
     } catch (error) {
+        await prisma.$disconnect;
         throw error;
     }   
 }
@@ -46,21 +43,21 @@ const getBodyPart=async(bodyPartName:any,req:any)=>{
 
 //種目名取得処理
 const getTrainingDisciplines=async(bodyPartId:number)=>{
-    try {
-       const trainingDisciplines:TrainingDiscipline=await prisma.training_discipline.findMany({
-        where:{
-            bodypartId:bodyPartId
-        },
-       })
-       if(!trainingDisciplines){
-        throw new Error(errorService.failedGetBodyParts)
-       }
-       await prisma.$disconnect;
-       return trainingDisciplines;
-    } catch (error) {
-      console.log(error)
-      await prisma.$disconnect;
+  try {
+    const trainingDisciplines:TrainingDiscipline=await prisma.training_discipline.findMany({
+      where:{
+        bodypartId:bodyPartId
+      },
+    })
+    if(!trainingDisciplines){
+      throw new Error(errorService.failedGetBodyParts)
     }
+    await prisma.$disconnect;
+    return trainingDisciplines;
+  } catch (error) {
+    await prisma.$disconnect;
+    throw error;
+  }
 }
 
 
@@ -68,16 +65,19 @@ const getTrainingDisciplines=async(bodyPartId:number)=>{
 //種目登録
 const registTrainingDiscipline=async(bodyPartId:number,disciplineName:string)=>{
     try {
-        const registardDiscipline=await prisma.training_discipline.create({
+        const registardDiscipline:TrainingDiscipline=await prisma.training_discipline.create({
             data:{
                 name:disciplineName,
                 bodypartId:bodyPartId
             }
         })
+        if(!registTrainingDiscipline){
+          throw new Error(errorService.failedGetTrainingDiscipline)
+        }
         return registardDiscipline;
     } catch (error) {
         console.log(error)
-        
+        throw error; 
     }
     
 }

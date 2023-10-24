@@ -34,16 +34,16 @@ export class RecordWorkoutComponent {
   }
   
   ngOnInit(){
-    this.trainingDiscipline=localStorage.getItem("disciplineName");
+    this.trainingDiscipline=sessionStorage.getItem("disciplineName");
   }
 
   recordWorkout(){
     const formData=this.workoutForm.value;
-    const userIdString:string|null=localStorage.getItem("id");
+    const userIdString:string|null=sessionStorage.getItem("id");
     const userId:number=Number(userIdString);
-    const bodyPartIdString=localStorage.getItem("bodyPartId")
+    const bodyPartIdString=sessionStorage.getItem("bodyPartId")
     const bodyPartId:number=Number(bodyPartIdString);
-    const disciplineIdString=localStorage.getItem("disciplineId");
+    const disciplineIdString=sessionStorage.getItem("disciplineId");
     const disciplineId=Number(disciplineIdString);
 
     const workoutInfo={
@@ -65,9 +65,9 @@ export class RecordWorkoutComponent {
         this.errorMessage=error
       }
     });
-    localStorage.removeItem("bodyPartId");
-    localStorage.removeItem("disciplineId");
-    localStorage.removeItem("disciplineName");
+    sessionStorage.removeItem("bodyPartId");
+    sessionStorage.removeItem("disciplineId");
+    sessionStorage.removeItem("disciplineName");
     this.router.navigate(["/home/workout/selectBodyPart"]);
      
     

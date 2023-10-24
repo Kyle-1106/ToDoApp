@@ -1,6 +1,6 @@
 import { BodyPart } from "../interfaces/bodyPart"
 import { TrainingDiscipline } from "../interfaces/trainingDiscipline";
-import { Response } from 'express';
+import { Request,Response } from 'express';
 var workoutService = require('../services/workoutService');
 var errorMessageService = require( '../services/errorMessageService');
 
@@ -39,29 +39,39 @@ const getBodyPartId=async(req:any,res:any)=>{
 }
 
 //種目名取得
-const getTrainingDisciplines=async (req:any,res:any)=>{
+const getTrainingDisciplines=async (req:Request,res:Response)=>{
     try {
-        const bodyPartId=Number(req.query.id);
-        const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPartId);
-        res.status(200).json(trainingDisciplines)
+      //リクエスト内容検証
+      if(req.body==null){
+        const errorMessage:string=errorMessageService.requestInvalid;        
+        throw new Error(errorMessage)
+      }
+      //種目名取得
+      const bodyPartId:number=Number(req.query.id);
+      const trainingDisciplines:TrainingDiscipline[]=await workoutService.getTrainingDisciplines(bodyPartId);
+      res.status(200).json(trainingDisciplines)
     } catch (error) {
-        console.log(error)
-        throw new Error("種目の取得ができません");
+      console.log(error);
+      res.status(500).json({ error:error });
         
     }
 }
 
 //種目登録
-const registTrainingDiscipline=async(req:any,res:any)=>{
+const registTrainingDiscipline=async(req:Request,res:Response)=>{
     try {
-        const bodyPartId:number=req.body.bodyPartId;
-        const disciplineName:string=req.body.bodyPartName;
-        const trainingDisciplines=await workoutService.registTrainingDiscipline(bodyPartId,disciplineName);
-        res.status(200).json(trainingDisciplines)
+      //リクエスト内容検証
+      if(req.body==null){
+        const errorMessage:string=errorMessageService.requestInvalid;        
+        throw new Error(errorMessage)
+      }
+      const bodyPartId:number=req.body.bodyPartId;
+      const disciplineName:string=req.body.bodyPartName;
+      const trainingDisciplines:TrainingDiscipline[]=await workoutService.registTrainingDiscipline(bodyPartId,disciplineName);
+      res.status(200).json(trainingDisciplines)
     } catch (error) {
-        console.log(error)
-        throw Error ("種目が取得取得できませんでした")
-    }
+      console.log(error);
+      res.status(500).json({error:error}) ;
 }
 
 

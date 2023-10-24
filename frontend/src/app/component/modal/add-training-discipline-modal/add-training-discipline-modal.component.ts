@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { SelectTrainingDisciplineService } from 'src/app/services/selectTrainingDiscipline/select-training-discipline.service';
-
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-training-discipline-modal',
   templateUrl: './add-training-discipline-modal.component.html',
@@ -12,21 +12,28 @@ import { SelectTrainingDisciplineService } from 'src/app/services/selectTraining
 export class AddTrainingDisciplineModalComponent {
   discipline:string;
 
-  constructor(private selectTrainingDisciplineService:SelectTrainingDisciplineService){}
+  constructor(
+    private selectTrainingDisciplineService:SelectTrainingDisciplineService,
+    private dialogRef: MatDialogRef<AddTrainingDisciplineModalComponent>){}
   //種目登録
   registDiscipline(){
     const disciplineName:string=this.discipline;
-    const bodyPartIdString:string|null=localStorage.getItem("bodyPartId");
+    const bodyPartIdString:string|null=sessionStorage.getItem("bodyPartId");
     const bodyPartId:number=Number(bodyPartIdString);
     this.selectTrainingDisciplineService.registarTrainingDisciplines(bodyPartId,disciplineName)
     .subscribe({
       next:(response)=>{
-        console.log(response+"が登録されました")
+        this.dialogRef.close();
       },
       error:(error)=>{
         console.log(error)
       }
     })
+  }
+  
+  //モーダル閉じる
+  close(){
+    this.dialogRef.close();
   }
 
 }
