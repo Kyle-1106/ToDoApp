@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { Login } from 'src/app/models/login.model';
+import { Login } from 'src/app/interfaces/login.interface';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Auth } from 'src/app/models/auth.interface';
+import { Auth } from 'src/app/interfaces/auth.interface';
 import { HttpOptions } from 'src/app/config/httpOption';
 import { Urls } from 'src/app/config/urls';
 import { ErrorMessages } from 'src/app/config/errorMessages';

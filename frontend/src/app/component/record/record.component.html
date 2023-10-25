@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="workout-log">
     
     <h2>筋トレ記録確認</h2>
@@ -9,7 +10,7 @@
       <option value="腕">腕</option>
       <option value="腹筋">腹筋</option>
     </select>
-    <button type="button" (click)="sortbyBodyPart()">検索</button>
+    <button type="button" (click)="sortbyBodyPart()">部位検索</button>
     
     
     <table>
@@ -34,6 +35,6 @@
         </tr>
       </tbody>
     </table>
-    <app-chart [showButton]="this.showButton" [selectedWorkoutLogs]="this.selectedWorkoutLogs"></app-chart>
+    <app-chart [selectedWorkoutLogs]="this.selectedWorkoutLogs"></app-chart>
   </div>
   

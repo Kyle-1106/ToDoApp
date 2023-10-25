@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpOptions } from 'src/app/config/httpOption';
-import { Workout, workoutInfo } from 'src/app/models/workout.model';
-import { WorkoutLog } from 'src/app/models/workoutLog.model';
+import { Workout, workoutInfo } from 'src/app/interfaces/workout.interface';
+import { WorkoutLog } from 'src/app/interfaces/workoutLog.interface';
 
 @Injectable({
   providedIn: 'root'

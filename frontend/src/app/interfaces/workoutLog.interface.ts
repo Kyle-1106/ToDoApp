@@ -1,4 +1,4 @@
-export class WorkoutLog{
+export interface WorkoutLog{
     id:number;
     userId:number;
     bodyPartId:number;

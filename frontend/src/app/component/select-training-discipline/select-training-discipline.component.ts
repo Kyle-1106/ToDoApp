@@ -1,6 +1,6 @@
 import { Component,Input,OnInit, OnChanges, SimpleChanges  } from '@angular/core';
 import { Router } from '@angular/router';
-import { TrainingDiscipline } from 'src/app/models/trainingDiscipline.model';
+import { TrainingDiscipline } from 'src/app/interfaces/trainingDiscipline.interface';
 import { SelectTrainingDisciplineService } from 'src/app/services/selectTrainingDiscipline/select-training-discipline.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTrainingDisciplineModalComponent } from '../modal/add-training-discipline-modal/add-training-discipline-modal.component';

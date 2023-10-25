@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { RecordService } from './../../services/record/record.service';
+import { Component, Input, Output } from '@angular/core';
+import { WorkoutLog } from 'src/app/interfaces/workoutLog.interface';
 
 @Component({
   selector: 'app-chart',
@@ -7,14 +9,29 @@ import { Component, Input } from '@angular/core';
 })
 export class ChartComponent {
 
-  @Input() showButton:boolean=false; 
-  @Input() selectedWorkoutLogs:any[];
+  // @Input() showButton:boolean=false; 
+  showButton:boolean;
+  @Input() selectedWorkoutLogs:WorkoutLog[];
   chartData: any[] = [];
   showChart:boolean;
 
+  constructor(private recordService:RecordService){}
+
+  ngOnInit(){
+    this.recordService.showButton$.subscribe(data => {
+      this.showButton = data;
+      // データが変更されたときに実行する処理
+    }); 
+    this.recordService.showChart$.subscribe(data => {
+      this.showChart = data;
+      // データが変更されたときに実行する処理
+    }); 
+
+  }
+
   createChart(){
     const groupedData=new Map<string,number>();
-    this.selectedWorkoutLogs.forEach((item:any)=>{
+    this.selectedWorkoutLogs.forEach((item:WorkoutLog)=>{
       const date=new Date(item.created_at).toLocaleDateString();
       const existingTotal = groupedData.get(date) || 0;
       groupedData.set(date, existingTotal + item.RM);
@@ -27,12 +44,10 @@ export class ChartComponent {
       });
     });
     this.showChart=true
-      return groupedData;
+    this.recordService.setShowChart(this.showChart);
+    this.showButton=false;
+    this.recordService.setShowButton(this.showButton);
     })
-
-
-
-
   }
   
 

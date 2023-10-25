@@ -1,0 +1,27 @@
+$primary-color: #007bff; // プライマリカラーを変数で設定
+
+// ボタンのスタイル
+button {
+  background-color: $primary-color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px; // ボタン間のマージンを追加
+}
+
+// チャートのスタイル
+ngx-charts-bar-horizontal {
+  width: 100%;
+  max-width: 800px; // チャートの最大幅を設定
+  margin: 20px auto; // チャートを中央に配置
+}
+
+// ホームへ戻るボタンのスタイル
+button[routerLink="/home"] {
+  background-color: #555; // 別のカラーを指定
+  margin: 10px;
+}
+
+// アプリケーション固有の要素のスタイルはここに追加

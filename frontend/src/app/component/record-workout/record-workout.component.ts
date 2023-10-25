@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Workout, workoutInfo } from 'src/app/models/workout.model';
+import { Workout, workoutInfo } from 'src/app/interfaces/workout.interface';
 import { RecordWorkoutService } from 'src/app/services/recordWorkout/record-workout.service';
 
 @Component({

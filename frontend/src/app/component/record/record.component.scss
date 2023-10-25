@@ -1,34 +1,52 @@
+$primary-color: #007bff; // プライマリカラーを変数で設定
+
+// ワークアウトログコンテナのスタイル
 .workout-log {
-    max-width: 800px;
-    margin: 0 auto;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   
-    h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
+  h2 {
+    font-size: 24px; // 見出しのフォントサイズ
+  }
+
+  // セレクトボックスのスタイル
+  #selectedBodyPart {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  // ボタンのスタイル
+  button {
+    background-color: $primary-color; // プライマリカラーを使用
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  // テーブルのスタイル
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; // マージンを追加
+    
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
     }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-  
-      th, td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
-      }
-  
-      th {
-        background-color: #f2f2f2;
-      }
-  
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-  
-      tr:nth-child(odd) {
-        background-color: #fff;
-      }
+    
+    th {
+      background-color: $primary-color; // プライマリカラーを使用
+      color: white;
     }
   }
-  
+}
+
+// アプリケーション固有の要素のスタイルはここに追加
+
+// app-chartコンポーネントのスタイルは、そのコンポーネント内で設定

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/models/user.model';
+import { User } from 'src/app/interfaces/user.interface';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { SignupUser } from 'src/app/models/signupUser.interface'; 
+import { SignupUser } from 'src/app/interfaces/signupUser.interface'; 
 import { HttpOptions } from 'src/app/config/httpOption';
-import { Auth } from 'src/app/models/auth.interface';
+import { Auth } from 'src/app/interfaces/auth.interface';
 import { Urls } from 'src/app/config/urls';
 import { ErrorMessages } from 'src/app/config/errorMessages';
 
