@@ -41,21 +41,26 @@ const signup = async (req:Request, res:Response):Promise<void> => {
   };
 
 //ユーザ取得
-  const getUser = async (loginData:Login, res:any) =>{
+  const getUser = async (req:any, res:Response):Promise<void> => {
     try {
-      const email=loginData.email;
+      //リクエスト内容検証
+      if(req.body==null){
+        const errorMessage:string=errorMessageService.requestInvalid;
+        throw new Error(errorMessage)
+      }
+      const requestBody=req.body;
+      const email:string=req.query.email;
       //ユーザ取得
       const user=await userService.selectUser(email);
-      res.json(user);
-      
+      res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ error: 'ユーザー情報の取得に失敗しました。' });
+      res.status(500).json({ error: error });
     }
     
   };
 
    //型ガード
-   const isValidSignup=(data: any): data is SignupUser=> {
+    const isValidSignup=(data: any): data is SignupUser=> {
     return data && typeof data === 'object' && 'name' in data && 'email' in data && 'password' in data;
   }
 

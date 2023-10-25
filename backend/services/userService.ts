@@ -36,22 +36,24 @@ const createUser = async (userData: SignupUser) => {
 
 
 //ユーザ取得
-const selectUser=async (userData:User,user:User)=>{
+const selectUser=async (email:string,user:User)=>{
   try {
-    const email=userData.email;
     const user:User|null= await prisma.user.findUnique({
       where: {
         email:email
       },
     })
     if(!user){
-      throw new Error("該当ユーザが見つかりません")
+      throw new Error(errorMessageService.failedGetUser)
     }
-    await prisma.$disconnect;
     return user;
     
   } catch (error) {
     console.log(error)
+    throw error;
+  }
+  finally{
+    await prisma.$disconnect;
   }
 }
   module.exports={

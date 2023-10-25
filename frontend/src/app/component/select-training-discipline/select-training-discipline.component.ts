@@ -54,9 +54,9 @@ export class SelectTrainingDisciplineComponent {
     const dialog=this.dialog.open(AddTrainingDisciplineModalComponent,{
       width: '300px',
       height: '200px',
-      disableClose: true,   // モーダルの外側をクリックして閉じるのを無効化
-      autoFocus: true,      // モーダルが表示されたときに自動的にフォーカスを設定
-      backdropClass: 'custom-backdrop', // バックドロップ（モーダルの背後）に適用するCSSクラス
+      disableClose: true,   
+      autoFocus: true,      
+      backdropClass: 'custom-backdrop', 
       panelClass: 'custom-modal'     
     });
     //モーダルが閉じたとき

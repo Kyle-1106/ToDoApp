@@ -1,0 +1,31 @@
+/* user.component.scss */
+.user-profile {
+  display: flex;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+}
+
+.user-details {
+  margin-left: 20px;
+}
+
+.user-email, .user-username {
+  font-size: 18px;
+  margin: 5px 0;
+  color: #333;
+}

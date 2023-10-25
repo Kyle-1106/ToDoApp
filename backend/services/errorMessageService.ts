@@ -12,6 +12,7 @@ const failedGetTrainingDiscipline:string="種目の取得に失敗しました"
 const failedRegistWorkOut:string="ワークアウトの登録に失敗しました"
 const failedgetWorkOut:string="ワークアウトの取得に失敗しました"
 const failedGetBodyPartsID:string="部位IDの取得に失敗しました"
+const failedGetUser:string="ユーザの取得に失敗しました"
 
 
 
@@ -27,5 +28,6 @@ module.exports={
   failedGetTrainingDiscipline,
   failedRegistWorkOut,
   failedgetWorkOut,
-  failedGetBodyPartsID
+  failedGetBodyPartsID,
+  failedGetUser
 }

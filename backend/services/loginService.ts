@@ -13,8 +13,9 @@ var config = require('../config/jwt.config');
 //パスワード認証とJWT発行
 const loginCheck=async (loginData:Login) =>{
     try {
+      const email:string=loginData.email;
         //該当ユーザ取得
-        const user:User=await userService.selectUser(loginData);
+        const user:User=await userService.selectUser(email);
         //パスワード認証
         const hashdPassword=user.password;
         const password=loginData.password; 

@@ -30,6 +30,10 @@ export class AddTrainingDisciplineModalComponent {
       }
     })
   }
+  //種目編集
+
+
+  //種目削除
   
   //モーダル閉じる
   close(){

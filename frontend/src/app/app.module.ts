@@ -19,6 +19,7 @@ import { RecordComponent } from './component/record/record.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartComponent } from './component/chart/chart.component';
 import { HeaderComponent } from './component/header/header.component';
+import { UserComponent } from './component/user/user.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HeaderComponent } from './component/header/header.component';
     RecordComponent,
     ChartComponent,
     HeaderComponent,
+    UserComponent,
     
   ],
   imports: [

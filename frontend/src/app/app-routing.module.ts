@@ -8,6 +8,7 @@ import { SelectBodypartComponent } from './component/select-bodypart/select-body
 import { SelectTrainingDisciplineComponent } from './component/select-training-discipline/select-training-discipline.component';
 import { RecordWorkoutComponent } from './component/record-workout/record-workout.component';
 import { RecordComponent } from './component/record/record.component';
+import { UserComponent } from './component/user/user.component';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
@@ -17,10 +18,8 @@ const routes: Routes = [
   {path:"home/workout/selectTrainingDiscipline",component:SelectTrainingDisciplineComponent,canActivate:[authGuard]},
   {path:"home/workout/recordWorkout",component:RecordWorkoutComponent,canActivate:[authGuard]},
   {path:"home/record",component:RecordComponent,canActivate:[authGuard]},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
-  // //後で404エラーページ作成
-  // { path: '**', redirectTo: '/login' } 
-  
+  {path:"user",component:UserComponent,canActivate:[authGuard]},
+  {path: '', redirectTo: '/login', pathMatch: 'full' }, 
 ];
 
 @NgModule({
