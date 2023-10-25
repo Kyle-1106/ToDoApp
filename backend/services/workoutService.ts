@@ -34,9 +34,12 @@ const getBodyPart=async(bodyPartName:any,req:any)=>{
               name:bodyPartName
           },
       })
+      if(!bodyPart){
+        throw new Error(errorService.failedGetBodyPartsID)
+      }
       return bodyPart;
   } catch (error) {
-      throw Error("部位IDを取得できませんでした")
+      throw error;
   }
   finally{
     await prisma.$disconnect();
@@ -137,11 +140,16 @@ const getWorkout=async(userId:number,res:any)=>{
               },
             },
           });
+          if(!workoutLogs){
+            throw new Error(errorService.failedgetWorkOut);
+          }
         return workoutLogs;
         
     } catch (error) {
-        console.log("ワークアウトの取得に失敗しました");
-        throw new Error("ワークアウトの取得に失敗しました");
+        throw error;
+    }
+    finally{
+      await prisma.$disconnect();
     }
 }
 

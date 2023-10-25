@@ -96,17 +96,19 @@ const recordWorkout=async(req:Request,res:Response)=>{
 }
 
 //ワークアウト取得
-const getWorkout=async(req:any,res:any)=>{
+const getWorkout=async(req:Request,res:Response)=>{
     try {
+        //リクエスト内容検証
+        if(req.body==null){
+          const errorMessage:string=errorMessageService.requestInvalid;        
+          throw new Error(errorMessage)
+        }
         const userId:number=Number(req.query.userId);
-        const workouts=await workoutService.getWorkout(userId);
-        console.log(workouts)
+        const workouts:WorkoutLog[]=await workoutService.getWorkout(userId);
         res.status(200).json(workouts);
     } catch (error) {
         console.log(error);
-        throw new Error("ワークアウトの取得ができません")
-
-        
+        res.status(500).json({error:error}) ;        
     }
 }
 
