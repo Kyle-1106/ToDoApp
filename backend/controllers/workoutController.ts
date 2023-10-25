@@ -1,6 +1,8 @@
 import { BodyPart } from "../interfaces/bodyPart"
 import { TrainingDiscipline } from "../interfaces/trainingDiscipline";
 import { Request,Response } from 'express';
+import { Workout } from "../interfaces/workout";
+import { WorkoutLog } from "@prisma/client";
 var workoutService = require('../services/workoutService');
 var errorMessageService = require( '../services/errorMessageService');
 
@@ -15,7 +17,7 @@ const getBodyParts=async (req:Request,res:Response) =>{
       }
       
         //部位名を取得
-        const allBodyParts:typeof BodyPart=await workoutService.getAllBodyParts();
+        const allBodyParts:BodyPart[]=await workoutService.getAllBodyParts();
         res.status(200).json(allBodyParts);
     }
     catch (error) {
@@ -72,24 +74,25 @@ const registTrainingDiscipline=async(req:Request,res:Response)=>{
     } catch (error) {
       console.log(error);
       res.status(500).json({error:error}) ;
+    }
 }
 
 
 //ワークアウト登録
-const recordWorkout=async(req:any,res:any)=>{
+const recordWorkout=async(req:Request,res:Response)=>{
     try {
-        console.log("workout")
-        const workout=req.body;
-        console.log(workout)
-        const workoutlog=await workoutService.recordWorkout(workout);
+       //リクエスト内容検証
+      if(req.body==null){
+        const errorMessage:string=errorMessageService.requestInvalid;        
+        throw new Error(errorMessage)
+      }
+        const workout:Workout=req.body;
+        const workoutlog:WorkoutLog=await workoutService.recordWorkout(workout);
         res.status(200).json(workoutlog);
-        
     } catch (error) {
         console.log(error);
-        throw new Error("ワークアウトの登録ができません")
-        
+        res.status(500).json({error:error}) ;
     }
-   
 }
 
 //ワークアウト取得

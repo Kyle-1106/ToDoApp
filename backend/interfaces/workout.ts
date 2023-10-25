@@ -1,8 +1,8 @@
-export class Workout{
+export interface Workout{
     id:number;
     userId:number;
     bodyPartId:number;
-    training_disciplineId:number
+    disciplineId:number
     created_at:Date;
     updated_at:Date;
     weight:number;

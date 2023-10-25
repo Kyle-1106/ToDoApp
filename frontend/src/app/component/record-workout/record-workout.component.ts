@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Workout, workoutInfo } from 'src/app/models/workout.model';
 import { RecordWorkoutService } from 'src/app/services/recordWorkout/record-workout.service';
 
 @Component({
@@ -46,7 +47,7 @@ export class RecordWorkoutComponent {
     const disciplineIdString=sessionStorage.getItem("disciplineId");
     const disciplineId=Number(disciplineIdString);
 
-    const workoutInfo={
+    const workoutInfo:workoutInfo={
       userId:userId,
       bodyPartId:bodyPartId,
       disciplineId:disciplineId,

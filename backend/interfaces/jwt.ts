@@ -1,4 +1,4 @@
-export class JWT{
+export interface JWT{
     userId:number;
     name:string;
     email:string;

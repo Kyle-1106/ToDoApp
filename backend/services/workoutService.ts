@@ -16,13 +16,14 @@ const getAllBodyParts=async ()=> {
         const allBodyParts=await prisma.bodypart.findMany();
         if(!allBodyParts){
           throw new Error(errorService.failedGetBodyParts)
-        }
-        await prisma.$disconnect();
+        }  
         return allBodyParts;
     } catch (error) {
-        await prisma.$disconnect;
-        throw error;
+      throw error;
     }   
+    finally{
+      await prisma.$disconnect();
+    }
 }
 
 //部位ID取得処理
@@ -34,9 +35,11 @@ const getBodyPart=async(bodyPartName:any,req:any)=>{
           },
       })
       return bodyPart;
-      
   } catch (error) {
       throw Error("部位IDを取得できませんでした")
+  }
+  finally{
+    await prisma.$disconnect();
   }
   
 }
@@ -52,11 +55,12 @@ const getTrainingDisciplines=async(bodyPartId:number)=>{
     if(!trainingDisciplines){
       throw new Error(errorService.failedGetBodyParts)
     }
-    await prisma.$disconnect;
     return trainingDisciplines;
   } catch (error) {
-    await prisma.$disconnect;
     throw error;
+  }
+  finally{
+    await prisma.$disconnect;
   }
 }
 
@@ -79,11 +83,14 @@ const registTrainingDiscipline=async(bodyPartId:number,disciplineName:string)=>{
         console.log(error)
         throw error; 
     }
+    finally{
+      await prisma.$disconnect();
+    }
     
 }
 
 //ワークアウト登録
-const recordWorkout=async(workout:any,res:any)=>{
+const recordWorkout=async(workout:Workout,record:Workout)=>{
     try {
         const record:Workout=await prisma.workoutLog.create({
             data:{
@@ -96,13 +103,17 @@ const recordWorkout=async(workout:any,res:any)=>{
                 memo:workout.memo
             }
         })
-        await prisma.$disconnect();
+        if(!record){
+          throw new Error(errorService.failedRegistWorkOut);
+        }
         return record;
-    } catch (error) {
-        
+    } catch (error) { 
+      console.log(error);
+      throw error;
     }
-   
-
+    finally{
+      await prisma.$disconnect();
+    }
 }
 
 

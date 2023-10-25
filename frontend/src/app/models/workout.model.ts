@@ -1,4 +1,4 @@
-export class Workout{
+export interface Workout{
     id:number;
     userId:number;
     bodyPartId:number;
@@ -9,4 +9,12 @@ export class Workout{
     reps:number;
     RM:number;
     memo:string
+}
+export interface  workoutInfo{
+  userId:number;
+  bodyPartId:number;
+  disciplineId:number;
+  weight:number;
+  reps:number;
+  memo:string;
 }

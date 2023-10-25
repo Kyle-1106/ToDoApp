@@ -9,6 +9,7 @@ const incorectPassword:string="パスワードが有効ではありません"
 const duplicateUser:string="そのメールアドレスはすでに登録されています"
 const failedGetBodyParts:string="部位名の取得に失敗しました"
 const failedGetTrainingDiscipline:string="種目の取得に失敗しました"
+const failedRegistWorkOut:string="ワークアウトの登録に失敗しました"
 
 
 
@@ -21,5 +22,6 @@ module.exports={
   incorectPassword,
   duplicateUser,
   failedGetBodyParts,
-  failedGetTrainingDiscipline
+  failedGetTrainingDiscipline,
+  failedRegistWorkOut
 }
