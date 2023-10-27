@@ -21,4 +21,8 @@ export class RecordService {
   setShowChart(data:boolean){
     this.showChart.next(data);    
   }
+  resetState() {
+    this.showButton.next(false);
+    this.showChart.next(false);
+  }
 }

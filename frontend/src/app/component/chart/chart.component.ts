@@ -9,7 +9,6 @@ import { WorkoutLog } from 'src/app/interfaces/workoutLog.interface';
 })
 export class ChartComponent {
 
-  // @Input() showButton:boolean=false; 
   showButton:boolean;
   @Input() selectedWorkoutLogs:WorkoutLog[];
   chartData: any[] = [];
@@ -18,16 +17,16 @@ export class ChartComponent {
   constructor(private recordService:RecordService){}
 
   ngOnInit(){
+    this.recordService.resetState();
     this.recordService.showButton$.subscribe(data => {
       this.showButton = data;
-      // データが変更されたときに実行する処理
     }); 
     this.recordService.showChart$.subscribe(data => {
       this.showChart = data;
-      // データが変更されたときに実行する処理
     }); 
 
   }
+
 
   createChart(){
     const groupedData=new Map<string,number>();
