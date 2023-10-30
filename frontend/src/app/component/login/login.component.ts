@@ -28,6 +28,11 @@ export class LoginComponent {
     });
     this.errorMessage="";
   }
+
+  ngOnInit(){
+    sessionStorage.clear();
+  }
+
 //ログイン処理
   onLogin():void{
     const formData = this.loginForm.value;
