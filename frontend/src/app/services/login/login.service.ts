@@ -37,7 +37,7 @@ login(loginForm: Login): Observable<Auth> {
 
   
   //ログイン判定
-   islogin():boolean{
+  islogin():boolean{
     const token=sessionStorage.getItem("jwt");
     //ログイン時
     if(token){
@@ -46,8 +46,4 @@ login(loginForm: Login): Observable<Auth> {
     //ログアウト時
     return false;
   }
-
-
-
-
 }

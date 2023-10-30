@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Workout, workoutInfo } from 'src/app/interfaces/workout.interface';
@@ -13,33 +13,43 @@ export class RecordWorkoutComponent {
   
   trainingDiscipline:string|null;
   workoutForm:FormGroup;
+  workoutForms: FormGroup[] = [];
   weight:FormControl;
   reps:FormControl;
   memo:FormControl;
   errorMessage:string;
 
-  constructor(private formBuilder:FormBuilder,private recordWorkoutService:RecordWorkoutService,private router:Router){
-    //バリデーション追加
-    this.weight=new FormControl("",[Validators.required,Validators.min(1)]);
-    this.reps=new FormControl("",[Validators.required,Validators.min(1)]);
-    this.memo=new FormControl("");
-
-
-    this.workoutForm=this.formBuilder.group({
-      weight:this.weight,
-      reps:this.reps,
-      memo:this.memo
-    })
-
+  constructor(
+    private formBuilder:FormBuilder,
+    private recordWorkoutService:RecordWorkoutService,
+    private router:Router){
     this.errorMessage=""
   }
   
   ngOnInit(){
     this.trainingDiscipline=sessionStorage.getItem("disciplineName");
   }
-//ワークアウト登録処理
+
+  //フォーム追加
+  addWorkoutForm() {
+    const newForm = this.formBuilder.group({
+      weight: new FormControl("", [Validators.required, Validators.min(1)]),
+      reps: new FormControl("", [Validators.required, Validators.min(1)]),
+      memo: new FormControl(""),
+    });
+    this.workoutForms.push(newForm);
+  }
+
+  //フォーム削除
+  removeWorkoutForm(index: number) {
+    if (this.workoutForms.length > 1) {
+        this.workoutForms.splice(index, 1);
+    }
+  }
+    
+
+  //ワークアウト登録処理
   recordWorkout(){
-    const formData=this.workoutForm.value;
     const userIdString:string|null=sessionStorage.getItem("id");
     const userId:number=Number(userIdString);
     const bodyPartIdString=sessionStorage.getItem("bodyPartId")
@@ -47,28 +57,28 @@ export class RecordWorkoutComponent {
     const disciplineIdString=sessionStorage.getItem("disciplineId");
     const disciplineId=Number(disciplineIdString);
 
-    const workoutInfo:workoutInfo={
-      userId:userId,
-      bodyPartId:bodyPartId,
-      disciplineId:disciplineId,
-      weight:formData.weight,
-      reps:formData.reps,
-      memo:formData.memo
-    }
-    //登録処理
-    this.recordWorkoutService.recordWorkout(workoutInfo).subscribe({
-      next:(response)=>{
-      },
-      error:(error)=>{
-        console.log(error);
-        this.errorMessage=error
+    for (const form of this.workoutForms){
+      const formData=form.value;
+      const workoutInfo:workoutInfo={
+        userId:userId,
+        bodyPartId:bodyPartId,
+        disciplineId:disciplineId,
+        weight:formData.weight,
+        reps:formData.reps,
+        memo:formData.memo
       }
-    });
+      //登録処理
+      this.recordWorkoutService.recordWorkout(workoutInfo).subscribe({
+        error:(error)=>{
+          console.log(error);
+          this.errorMessage=error
+        }
+      });
+    }
     sessionStorage.removeItem("bodyPartId");
     sessionStorage.removeItem("disciplineId");
     sessionStorage.removeItem("disciplineName");
     this.router.navigate(["/home/workout/selectBodyPart"]);
-    
   }
 
 

@@ -3,10 +3,6 @@
     <div class="fw-bold">
       <p>種目を選んでください</p>
     </div>
-    <div class="custom-btns"> 
-      <button type="button" class="custom-button" (click)="openModal()">種目の追加</button>
-      <button type="button" class="custom-button" (click)="openModal()">種目の編集、削除</button>
-    </div>
     <div *ngIf="trainingDisciplines">
       <div class="my-2">
         <button
@@ -16,8 +12,10 @@
         >
           {{ discipline.name}}
         </button>
+        <div class="custom-btns"> 
+          <button type="button" class="custom-button" (click)="openModal()">種目の追加</button>
+        </div>
       </div>
     </div>
-   
   </div>
   
